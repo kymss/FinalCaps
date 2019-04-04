@@ -36,18 +36,25 @@ public class Register extends javax.swing.JPanel {
         RG_PASSWORD = new javax.swing.JPasswordField();
         RG_CONFIRMPASSWORD = new javax.swing.JPasswordField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setOpaque(false);
+        setBackground(new java.awt.Color(153, 153, 153));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(RG_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 81, 400, -1));
 
         jLabel17.setText("Name");
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 84, -1, -1));
 
         jLabel18.setText("Last Name");
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 115, -1, -1));
 
         labelpw.setText("Password");
+        add(labelpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 169, -1, -1));
 
         jLabel20.setText("Confirm Password");
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 194, -1, -1));
+        add(RG_LASTNAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 112, 400, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Admin", "User" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 231, 400, -1));
 
         SAVE.setText("SAVE");
         SAVE.addActionListener(new java.awt.event.ActionListener() {
@@ -55,63 +62,13 @@ public class Register extends javax.swing.JPanel {
                 SAVEActionPerformed(evt);
             }
         });
+        add(SAVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 278, 400, -1));
 
         jLabel19.setText("Username");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(labelpw)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel17))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SAVE, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RG_NAME)
-                    .addComponent(RG_LASTNAME)
-                    .addComponent(RG_USERNAME)
-                    .addComponent(RG_PASSWORD)
-                    .addComponent(RG_CONFIRMPASSWORD, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(438, 438, 438))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(RG_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(RG_LASTNAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(RG_USERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelpw)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(RG_PASSWORD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RG_CONFIRMPASSWORD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(16, 16, 16)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(SAVE)
-                .addContainerGap(141, Short.MAX_VALUE))
-        );
+        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 146, -1, -1));
+        add(RG_USERNAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 143, 400, -1));
+        add(RG_PASSWORD, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 169, 400, -1));
+        add(RG_CONFIRMPASSWORD, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 195, 400, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void SAVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SAVEActionPerformed

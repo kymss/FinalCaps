@@ -141,6 +141,7 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
         search = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         firstnameField1.setBackground(new java.awt.Color(252, 252, 252));
         firstnameField1.setForeground(new java.awt.Color(46, 46, 46));
@@ -152,80 +153,111 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 firstnameField1MouseClicked(evt);
             }
         });
+        add(firstnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 53, 221, 25));
 
         jLabel1.setText("First Name");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 64, -1, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 78, 221, 10));
 
         jLabel2.setText("Last Name");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 105, -1, -1));
 
         lastnameField.setBackground(new java.awt.Color(252, 252, 252));
         lastnameField.setForeground(new java.awt.Color(46, 46, 46));
         lastnameField.setBorder(null);
         lastnameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         lastnameField.setOpaque(false);
+        add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 94, 221, 25));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 119, 221, 10));
 
         jLabel3.setText("Occupation");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 146, -1, -1));
 
         occupationField.setBackground(new java.awt.Color(252, 252, 252));
         occupationField.setForeground(new java.awt.Color(46, 46, 46));
         occupationField.setBorder(null);
         occupationField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         occupationField.setOpaque(false);
+        add(occupationField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 135, 221, 25));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 160, 221, 10));
 
         jLabel4.setText("Address");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 187, -1, -1));
 
         addressField.setBackground(new java.awt.Color(252, 252, 252));
         addressField.setForeground(new java.awt.Color(46, 46, 46));
         addressField.setBorder(null);
         addressField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         addressField.setOpaque(false);
+        add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 176, 221, 25));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 201, 221, 10));
 
         jLabel6.setText("Contact Number");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 228, -1, -1));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 242, 221, 10));
 
         contactnumberField.setBackground(new java.awt.Color(252, 252, 252));
         contactnumberField.setForeground(new java.awt.Color(46, 46, 46));
         contactnumberField.setBorder(null);
         contactnumberField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         contactnumberField.setOpaque(false);
+        add(contactnumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 217, 221, 25));
 
         jLabel5.setText("Health Concern?");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 269, -1, -1));
 
         healthconcernField.setBackground(new java.awt.Color(252, 252, 252));
         healthconcernField.setForeground(new java.awt.Color(46, 46, 46));
         healthconcernField.setBorder(null);
         healthconcernField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         healthconcernField.setOpaque(false);
+        add(healthconcernField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 258, 221, 25));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 283, 221, 10));
 
         jLabel7.setText("Hobbies");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 310, -1, -1));
 
         hobbiesField.setBackground(new java.awt.Color(252, 252, 252));
         hobbiesField.setForeground(new java.awt.Color(46, 46, 46));
         hobbiesField.setBorder(null);
         hobbiesField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         hobbiesField.setOpaque(false);
+        add(hobbiesField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 299, 221, 25));
+        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 324, 221, 10));
 
         jLabel8.setText("Current Weight");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 351, -1, -1));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 365, 221, 10));
 
         currentweightField.setBackground(new java.awt.Color(252, 252, 252));
         currentweightField.setForeground(new java.awt.Color(46, 46, 46));
         currentweightField.setBorder(null);
         currentweightField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         currentweightField.setOpaque(false);
+        add(currentweightField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 340, 221, 25));
 
         jLabel16.setText("Target Weight");
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 392, -1, -1));
 
         targetweightField.setBackground(new java.awt.Color(252, 252, 252));
         targetweightField.setForeground(new java.awt.Color(46, 46, 46));
         targetweightField.setBorder(null);
         targetweightField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         targetweightField.setOpaque(false);
+        add(targetweightField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 381, 221, 25));
+        add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 406, 221, 10));
 
         contactpersonField.setBackground(new java.awt.Color(252, 252, 252));
         contactpersonField.setForeground(new java.awt.Color(46, 46, 46));
         contactpersonField.setBorder(null);
         contactpersonField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         contactpersonField.setOpaque(false);
+        add(contactpersonField, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 422, 221, 25));
+        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 447, 221, 10));
 
         jLabel20.setText("Contact Person");
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 433, -1, -1));
+        add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 126, 28));
 
         month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "1 year" }));
         month.setToolTipText("");
@@ -234,8 +266,10 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 monthActionPerformed(evt);
             }
         });
+        add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 510, 126, 28));
 
         end.setEditable(false);
+        add(end, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 550, 126, 28));
 
         Delete_btn.setBackground(new java.awt.Color(255, 102, 102));
         Delete_btn.setText("Delete");
@@ -244,6 +278,7 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 Delete_btnActionPerformed(evt);
             }
         });
+        add(Delete_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(926, 418, 84, 36));
 
         UPDATE_BUTTON.setBackground(new java.awt.Color(204, 255, 255));
         UPDATE_BUTTON.setText("Update");
@@ -252,6 +287,7 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 UPDATE_BUTTONActionPerformed(evt);
             }
         });
+        add(UPDATE_BUTTON, new org.netbeans.lib.awtextra.AbsoluteConstraints(926, 373, 84, 34));
 
         jButton1.setBackground(new java.awt.Color(204, 255, 255));
         jButton1.setText("Clear");
@@ -260,6 +296,7 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(926, 328, 84, 34));
 
         superadd.setBackground(new java.awt.Color(204, 255, 204));
         superadd.setText("Save");
@@ -268,6 +305,7 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 superaddActionPerformed(evt);
             }
         });
+        add(superadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(926, 283, 84, 34));
 
         table.setAutoCreateRowSorter(true);
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -296,6 +334,8 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(table);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 53, 531, 433));
+
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchKeyPressed(evt);
@@ -304,190 +344,7 @@ public class NEW_MEMBERS extends javax.swing.JPanel {
                 searchKeyReleased(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(end, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(118, 118, 118))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(67, 67, 67)
-                                    .addComponent(firstnameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(68, 68, 68)
-                                    .addComponent(lastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(64, 64, 64)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(occupationField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(79, 79, 79)
-                                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(40, 40, 40)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(contactnumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(healthconcernField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(80, 80, 80)
-                                    .addComponent(hobbiesField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(44, 44, 44)
-                                    .addComponent(currentweightField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel16)
-                                    .addGap(49, 49, 49)
-                                    .addComponent(targetweightField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel20)
-                                    .addGap(44, 44, 44)
-                                    .addComponent(contactpersonField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(118, 118, 118)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UPDATE_BUTTON, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(superadd, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Delete_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel1))
-                            .addComponent(firstnameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel2))
-                            .addComponent(lastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(occupationField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(jLabel4))
-                                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addComponent(contactnumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(jLabel5))
-                                    .addComponent(healthconcernField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jLabel7))
-                                            .addComponent(hobbiesField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jLabel8))
-                                            .addComponent(currentweightField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jLabel16))
-                                            .addComponent(targetweightField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jLabel20))
-                                            .addComponent(contactpersonField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(superadd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(UPDATE_BUTTON, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Delete_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(36, 36, 36)
-                                .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(end, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 78, Short.MAX_VALUE))
-        );
+        add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 16, 141, 26));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
