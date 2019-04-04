@@ -1,7 +1,10 @@
 package fitnesscampsystem;
 
+import net.proteanit.sql.DbUtils;
+import java.sql.*;
 import DataBase.Database;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +12,8 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,19 +35,36 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     NEW_MEMBERS p2;
     Register p3;
     Monthly_Reports p4;
+    
+//    static String setFirstname = "";
 //    NEW_MEMBERS p6;
 
-    static boolean maximized = true;
+//    static boolean maximized = true;
 
+ 
+    
     public Main_Frame_Admin() {
         initComponents();
+        
+       
+        
+        System.out.print("hi");
         con = Database.ConnectDB();
+        
+        ShowDate();
+        
         countAllMembers();
 
         Toolkit tk = Toolkit.getDefaultToolkit();
-        int xsize = (int) tk.getScreenSize().getWidth();
-        int ysize = (int) tk.getScreenSize().getHeight();
-        this.setSize(xsize, ysize);
+        Dimension dim = new Dimension(tk.getScreenSize());
+        int height = (int) dim.getHeight();
+        int width = (int) dim.getWidth();
+        
+        setSize(width, height);
+        
+//        int xsize = (int) tk.getScreenSize().getWidth();
+//        int ysize = (int) tk.getScreenSize().getHeight();
+//        this.setSize(xsize, ysize);
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         p1 = new DASHBOARD();
@@ -71,22 +93,27 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         c.gridy = 0;
         DynamicPanel.add(p4, c);
 
-//        c.gridx = 0;
-//        c.gridy = 0;
-//        DynamicPanel.add(p5, c);
-//
-//        c.gridx = 0;
-//        c.gridy = 0;
-//        DynamicPanel.add(p6, c);
         p1.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
         p4.setVisible(false);
-//        p5.setVisible(false);
-//        p6.setVisible(false);
-
-//        members_table_update();
     }
+    
+ 
+    
+//        public Main_Frame_Admin(String uname) {
+//        initComponents();
+////        here.setText(uname + "!!");
+//        System.out.print("hi");
+//        con = Database.ConnectDB();
+//    }
+    
+       void ShowDate() {
+        Date d = new Date();
+        SimpleDateFormat s = new SimpleDateFormat("MMMM dd, yyyy");
+        date.setText(s.format(d));
+    }
+
 
     public void countAllMembers() {
         try {
@@ -109,12 +136,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
     }
 
-    public Main_Frame_Admin(String username) {
-        initComponents();
-        log.setText(username + "!!");
 
-        con = Database.ConnectDB();
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -126,7 +148,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         SIDEBAR = new javax.swing.JPanel();
         welcome = new javax.swing.JLabel();
-        log = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         DASHBOARD = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
         LBL_DASHBOARD = new javax.swing.JLabel();
@@ -152,6 +174,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         new_mems1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        date = new javax.swing.JLabel();
         DynamicPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -162,6 +186,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1414, 791));
         setSize(new java.awt.Dimension(0, 0));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -198,7 +223,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 982, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1051, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,15 +244,17 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 24));
+
         SIDEBAR.setBackground(new java.awt.Color(51, 51, 51));
 
         welcome.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         welcome.setForeground(new java.awt.Color(204, 204, 204));
         welcome.setText("Welcome");
 
-        log.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        log.setForeground(new java.awt.Color(204, 204, 204));
-        log.setText("jLabel3");
+        name.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        name.setForeground(new java.awt.Color(204, 204, 204));
+        name.setText("jLabel3");
 
         DASHBOARD.setBackground(new java.awt.Color(51, 51, 51));
         DASHBOARD.setPreferredSize(new java.awt.Dimension(214, 60));
@@ -259,7 +286,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addComponent(LBL_DASHBOARD, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(dashboard)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         DASHBOARDLayout.setVerticalGroup(
             DASHBOARDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,15 +429,16 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             SIDEBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ADD_USER, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(MONTH_REPORT, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-            .addGroup(SIDEBARLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(log, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
             .addComponent(MEMBERS, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
             .addGroup(SIDEBARLayout.createSequentialGroup()
-                .addComponent(DASHBOARD, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addGroup(SIDEBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DASHBOARD, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addGroup(SIDEBARLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(welcome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(name)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         SIDEBARLayout.setVerticalGroup(
@@ -419,7 +447,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(SIDEBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcome)
-                    .addComponent(log))
+                    .addComponent(name))
                 .addGap(68, 68, 68)
                 .addComponent(DASHBOARD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -431,7 +459,10 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addContainerGap(399, Short.MAX_VALUE))
         );
 
+        getContentPane().add(SIDEBAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 24, -1, -1));
+
         TOPBAR.setBackground(new java.awt.Color(219, 219, 219));
+        TOPBAR.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Total_Members.setBackground(new java.awt.Color(245, 104, 84));
         Total_Members.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -472,6 +503,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        TOPBAR.add(Total_Members, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
         jPanel3.setBackground(new java.awt.Color(0, 110, 175));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -502,6 +535,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addContainerGap())
         );
+
+        TOPBAR.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(9, 192, 239));
         jPanel6.setPreferredSize(new java.awt.Dimension(235, 69));
@@ -538,6 +573,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        TOPBAR.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, 70));
+
         jPanel7.setBackground(new java.awt.Color(0, 163, 89));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -569,62 +606,37 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout TOPBARLayout = new javax.swing.GroupLayout(TOPBAR);
-        TOPBAR.setLayout(TOPBARLayout);
-        TOPBARLayout.setHorizontalGroup(
-            TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TOPBARLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Total_Members, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+        TOPBAR.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        date.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        date.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(date)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
-        TOPBARLayout.setVerticalGroup(
-            TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TOPBARLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Total_Members, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(date)
                 .addContainerGap())
         );
 
+        TOPBAR.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        getContentPane().add(TOPBAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 24, 1069, -1));
+
         DynamicPanel.setBackground(new java.awt.Color(250, 250, 250));
         DynamicPanel.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SIDEBAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DynamicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TOPBAR, javax.swing.GroupLayout.PREFERRED_SIZE, 1008, Short.MAX_VALUE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 21, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SIDEBAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TOPBAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(DynamicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        getContentPane().add(DynamicPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 154, 1070, 637));
 
         getAccessibleContext().setAccessibleName("Main menu");
 
@@ -784,6 +796,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JPanel Total_Members;
     private javax.swing.JLabel adduser;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JLabel date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -792,14 +805,13 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JLabel log;
     private javax.swing.JLabel members;
     private javax.swing.JLabel monthly;
+    private javax.swing.JLabel name;
     private javax.swing.JLabel new_mems;
     private javax.swing.JLabel new_mems1;
     private javax.swing.JLabel new_mems2;
