@@ -1,6 +1,7 @@
 package panels;
 
 import DataBase.Database;
+import fitnesscampsystem.payment;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -31,26 +32,58 @@ public class ADD_MEMBER extends javax.swing.JPanel {
 
     public ADD_MEMBER() {
         initComponents();
+     
 
         con = Database.ConnectDB();
         start.setVisible(false);
         end.setVisible(false);
+        created_at.setVisible(false);
         update_table();
-        
-        
-        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14 ));
+
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         table.getTableHeader().setOpaque(false);
         table.getTableHeader().setBackground(new Color(14, 191, 233));
         table.getTableHeader().setForeground(new Color(135, 135, 135));
         table.setRowHeight(25);
-        
-        
+pay();
+
     }
+    
+     public void pay() {
+//        payment p = new payment();
+//        p.setVisible(true);
+
+            
+        
+       if (month.getSelectedItem().equals("1 month")) {
+//           p.jTextField1.setText("500");
+           yu.setText("500");
+      } else if (month.getSelectedItem().equals("2 months")) {
+//           p.jTextField1.setText("1000");
+          yu.setText("1000");
+     } else if (month.getSelectedItem().equals("3 months")) {
+//          p.jTextField1.setText("1500");
+            yu.setText("1500");
+        } else if (month.getSelectedItem().equals("4 months")) {
+//           p.jTextField1.setText("2000");
+            yu.setText("2000");
+        } else if (month.getSelectedItem().equals("5 months")) {
+//           p.jTextField1.setText("2500");
+            yu.setText("2500");
+       } else if (month.getSelectedItem().equals("6 months")) {
+//            p.jTextField1.setText("3000");
+           yu.setText("3000");
+        } else if (month.getSelectedItem().equals("1 year")) {
+//            p.jTextField1.setText("6000");
+           yu.setText("6000");
+        }
+    }
+
 
     private void update_table() {
 
         try {
-            String sql = "SELECT FirstName, LastName, Start, End FROM Members_Tbl ";
+            String sql = "SELECT Firstname, Lastname, Start, End FROM Members_Tbl ";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -63,18 +96,22 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         }
     }
 
-    
-
+//    public  void createdat(){
+//        DateFormat df = new SimpleDateFormat("MMM-dd-yyyy");
+//        Date s = new Date();
+//        created_at.setDate(s);
+//    }
     private void computations() {
         SimpleDateFormat datefmt = new SimpleDateFormat("MM/dd/yyyy");
         String dates = ((JTextField) start.getDateEditor().getUiComponent()).getText();
         Date date = start.getDate();
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
+//        cal.setTime(date);
 
         if (month.getSelectedItem().equals("1 month")) {
             cal.add(Calendar.MONTH, 1); // Add 30 days
             end.setText("" + datefmt.format(cal.getTime()));
+        } else if (month.getSelectedItem().equals("2 months")) {
             cal.add(Calendar.MONTH, 2); // Add 30 days
             end.setText("" + datefmt.format(cal.getTime()));
         } else if (month.getSelectedItem().equals("3 months")) {
@@ -107,10 +144,69 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         targetweightField.setText("");
         contactpersonField.setText("");
         month.setSelectedIndex(0);
-        ((JTextField)start.getDateEditor().getUiComponent()).setText("");
+        ((JTextField) start.getDateEditor().getUiComponent()).setText("");
         end.setText("");
+        ((JTextField) created_at.getDateEditor().getUiComponent()).setText("");
 
     }
+    
+    public void SAVENA(){
+        
+        if ((firstnameField1.getText().trim().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (lastnameField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (occupationField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (addressField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (contactnumberField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (healthconcernField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (contactpersonField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                String sql = "INSERT INTO Members_Tbl(Firstname,Lastname,Occupation,Address,ContactNumber,Healthconcern,"
+                        + "Hobbies,Currentweight,Targetweight,Contactperson,Month,Start,End,Created_at,Payment)"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                pst = con.prepareStatement(sql);
+                pst.setString(1, firstnameField1.getText());
+                pst.setString(2, lastnameField.getText());
+                pst.setString(3, occupationField.getText());
+                pst.setString(4, addressField.getText());
+                pst.setString(5, contactnumberField.getText());
+                pst.setString(6, healthconcernField.getText());
+                pst.setString(7, hobbiesField.getText());
+                pst.setString(8, currentweightField.getText());
+                pst.setString(9, targetweightField.getText());
+                pst.setString(10, contactpersonField.getText());
+
+                String hv = month.getSelectedItem().toString();
+                pst.setString(11, hv);
+
+                String dt = ((JTextField) start.getDateEditor().getUiComponent()).getText();
+                pst.setString(12, dt);
+                pst.setString(13, end.getText());
+                String ct = ((JTextField) created_at.getDateEditor().getUiComponent()).getText();
+                pst.setString(14, ct);
+                pst.setString(15, yu.getText());
+                
+
+                pst.execute();
+
+                JOptionPane.showMessageDialog(null, "saved");
+                pst.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+        update_table();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,6 +254,8 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
+        created_at = new com.toedter.calendar.JDateChooser();
+        yu = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(250, 250, 250));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,11 +273,11 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(firstnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 221, 25));
 
         jLabel1.setText("First Name");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, -1, -1));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 221, 10));
 
         jLabel2.setText("Last Name");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
 
         lastnameField.setBackground(new java.awt.Color(250, 250, 250));
         lastnameField.setForeground(new java.awt.Color(46, 46, 46));
@@ -190,7 +288,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 221, 10));
 
         jLabel3.setText("Occupation");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, -1, 20));
 
         occupationField.setBackground(new java.awt.Color(250, 250, 250));
         occupationField.setForeground(new java.awt.Color(46, 46, 46));
@@ -201,7 +299,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 221, 10));
 
         jLabel4.setText("Address");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, -1, -1));
 
         addressField.setBackground(new java.awt.Color(250, 250, 250));
         addressField.setForeground(new java.awt.Color(46, 46, 46));
@@ -212,7 +310,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 240, 221, 10));
 
         jLabel6.setText("Contact Number");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
         add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 221, 10));
 
         contactnumberField.setBackground(new java.awt.Color(250, 250, 250));
@@ -223,7 +321,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(contactnumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 250, 221, 25));
 
         jLabel5.setText("Health Concern?");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 310, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
 
         healthconcernField.setBackground(new java.awt.Color(250, 250, 250));
         healthconcernField.setForeground(new java.awt.Color(46, 46, 46));
@@ -239,7 +337,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, 221, 10));
 
         jLabel7.setText("Hobbies");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, -1, -1));
 
         hobbiesField.setBackground(new java.awt.Color(250, 250, 250));
         hobbiesField.setForeground(new java.awt.Color(46, 46, 46));
@@ -250,7 +348,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 221, 10));
 
         jLabel8.setText("Current Weight");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, -1, -1));
         add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 400, 221, 10));
 
         currentweightField.setBackground(new java.awt.Color(250, 250, 250));
@@ -266,7 +364,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(currentweightField, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, 221, 25));
 
         jLabel16.setText("Target Weight");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, -1, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, -1, -1));
 
         targetweightField.setBackground(new java.awt.Color(250, 250, 250));
         targetweightField.setForeground(new java.awt.Color(46, 46, 46));
@@ -286,7 +384,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
 
         jLabel20.setText("Membership");
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, -1, -1));
-        add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 590, 126, 20));
+        add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 550, 126, 20));
 
         month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "1 year" }));
         month.setToolTipText("");
@@ -298,19 +396,39 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, 220, 28));
 
         end.setEditable(false);
-        add(end, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 590, 126, 20));
+        add(end, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, 126, 20));
 
-        DELETE.setBackground(new java.awt.Color(255, 102, 102));
+        DELETE.setBackground(new java.awt.Color(255, 3, 13));
         DELETE.setText("Delete");
+        DELETE.setContentAreaFilled(false);
+        DELETE.setOpaque(true);
+        DELETE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DELETEMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DELETEMouseExited(evt);
+            }
+        });
         DELETE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DELETEActionPerformed(evt);
             }
         });
-        add(DELETE, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 460, 84, 36));
+        add(DELETE, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 84, 36));
 
-        UPDATE.setBackground(new java.awt.Color(204, 255, 255));
+        UPDATE.setBackground(new java.awt.Color(11, 181, 255));
         UPDATE.setText("Update");
+        UPDATE.setContentAreaFilled(false);
+        UPDATE.setOpaque(true);
+        UPDATE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                UPDATEMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                UPDATEMouseExited(evt);
+            }
+        });
         UPDATE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UPDATEActionPerformed(evt);
@@ -318,8 +436,18 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         });
         add(UPDATE, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 410, 84, 34));
 
-        CLEAR.setBackground(new java.awt.Color(204, 255, 255));
+        CLEAR.setBackground(new java.awt.Color(11, 181, 255));
         CLEAR.setText("Clear");
+        CLEAR.setContentAreaFilled(false);
+        CLEAR.setOpaque(true);
+        CLEAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CLEARMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CLEARMouseExited(evt);
+            }
+        });
         CLEAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CLEARActionPerformed(evt);
@@ -327,14 +455,24 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         });
         add(CLEAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 370, 84, 34));
 
-        SAVE.setBackground(new java.awt.Color(204, 255, 204));
+        SAVE.setBackground(new java.awt.Color(11, 181, 255));
         SAVE.setText("Save");
+        SAVE.setContentAreaFilled(false);
+        SAVE.setOpaque(true);
+        SAVE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SAVEMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SAVEMouseExited(evt);
+            }
+        });
         SAVE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SAVEActionPerformed(evt);
             }
         });
-        add(SAVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 320, 84, 34));
+        add(SAVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 330, 84, 34));
 
         table = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -383,12 +521,14 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 220, 26));
 
         jLabel21.setText("Contact Person");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 470, -1, -1));
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel9.setText("Add a Member ");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, -1));
         add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 540, -1));
+        add(created_at, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, -1, -1));
+        add(yu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 60, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -492,6 +632,8 @@ public class ADD_MEMBER extends javax.swing.JPanel {
             }
         }
         update_table();
+        clear_operation();
+
     }//GEN-LAST:event_DELETEActionPerformed
 
     private void UPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATEActionPerformed
@@ -534,64 +676,25 @@ public class ADD_MEMBER extends javax.swing.JPanel {
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
         computations();
+        pay();
     }//GEN-LAST:event_monthActionPerformed
 
     private void SAVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SAVEActionPerformed
-        if ((firstnameField1.getText().trim().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (lastnameField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (occupationField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (addressField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (contactnumberField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (healthconcernField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (contactpersonField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                String sql = "INSERT INTO Members_Tbl(Firstname,Lastname,Occupation,Address,ContactNumber,Healthconcern,"
-                        + "Hobbies,Currentweight,Targetweight,Contactperson,Month,Start,End)"
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//        pay();
 
-                pst = con.prepareStatement(sql);
-                pst.setString(1, firstnameField1.getText());
-                pst.setString(2, lastnameField.getText());
-                pst.setString(3, occupationField.getText());
-                pst.setString(4, addressField.getText());
-                pst.setString(5, contactnumberField.getText());
-                pst.setString(6, healthconcernField.getText());
-                pst.setString(7, hobbiesField.getText());
-                pst.setString(8, currentweightField.getText());
-                pst.setString(9, targetweightField.getText());
-                pst.setString(10, contactpersonField.getText());
-
-                String hv = month.getSelectedItem().toString();
-                pst.setString(11, hv);
-
-                String dt = ((JTextField) start.getDateEditor().getUiComponent()).getText();
-                pst.setString(12, dt);
-                pst.setString(13, end.getText());
-
-                pst.execute();
-
-                JOptionPane.showMessageDialog(null, "saved");
-                pst.close();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-
-        update_table();
+            SAVENA();
+//
+//     
     }//GEN-LAST:event_SAVEActionPerformed
 
     private void firstnameField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_firstnameField1MouseClicked
         DateFormat df = new SimpleDateFormat("MMM-dd-yyyy");
         Date date = new Date();
         start.setDate(date);
+        created_at.setDate(date);
+
+//        createdat();
+
     }//GEN-LAST:event_firstnameField1MouseClicked
 
     private void healthconcernFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_healthconcernFieldActionPerformed
@@ -602,6 +705,38 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_currentweightFieldActionPerformed
 
+    private void SAVEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SAVEMouseEntered
+        SAVE.setBackground(new Color(56, 176, 222));
+    }//GEN-LAST:event_SAVEMouseEntered
+
+    private void SAVEMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SAVEMouseExited
+        SAVE.setBackground(new Color(11, 181, 255));
+    }//GEN-LAST:event_SAVEMouseExited
+
+    private void CLEARMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CLEARMouseEntered
+        CLEAR.setBackground(new Color(56, 176, 222));
+    }//GEN-LAST:event_CLEARMouseEntered
+
+    private void CLEARMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CLEARMouseExited
+        CLEAR.setBackground(new Color(11, 181, 255));
+    }//GEN-LAST:event_CLEARMouseExited
+
+    private void UPDATEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UPDATEMouseEntered
+        UPDATE.setBackground(new Color(56, 176, 222));
+    }//GEN-LAST:event_UPDATEMouseEntered
+
+    private void UPDATEMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UPDATEMouseExited
+        UPDATE.setBackground(new Color(11, 181, 255));
+    }//GEN-LAST:event_UPDATEMouseExited
+
+    private void DELETEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DELETEMouseEntered
+        DELETE.setBackground(new Color(212, 26, 31));
+    }//GEN-LAST:event_DELETEMouseEntered
+
+    private void DELETEMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DELETEMouseExited
+        UPDATE.setBackground(new Color(255, 3, 13));
+    }//GEN-LAST:event_DELETEMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CLEAR;
@@ -611,6 +746,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
     private javax.swing.JTextField addressField;
     private javax.swing.JTextField contactnumberField;
     private javax.swing.JTextField contactpersonField;
+    private com.toedter.calendar.JDateChooser created_at;
     private javax.swing.JTextField currentweightField;
     public javax.swing.JTextField end;
     private javax.swing.JTextField firstnameField1;
@@ -641,11 +777,12 @@ public class ADD_MEMBER extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField lastnameField;
-    private javax.swing.JComboBox month;
+    public javax.swing.JComboBox month;
     private javax.swing.JTextField occupationField;
     private javax.swing.JTextField search;
     private com.toedter.calendar.JDateChooser start;
     private javax.swing.JTable table;
     private javax.swing.JTextField targetweightField;
+    private javax.swing.JTextField yu;
     // End of variables declaration//GEN-END:variables
 }
