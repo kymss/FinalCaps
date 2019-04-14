@@ -251,6 +251,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         jSeparator11 = new javax.swing.JSeparator();
         created_at = new com.toedter.calendar.JDateChooser();
         yu = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 250, 250));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -526,6 +527,9 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 540, -1));
         add(created_at, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, -1, -1));
         add(yu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 60, -1));
+
+        jButton1.setText("Add Member ");
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -749,6 +753,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
     private javax.swing.JTextField firstnameField1;
     private javax.swing.JTextField healthconcernField;
     private javax.swing.JTextField hobbiesField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;

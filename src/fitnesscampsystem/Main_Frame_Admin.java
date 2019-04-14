@@ -155,23 +155,24 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         SIDEBAR = new javax.swing.JPanel();
         DASHBOARD_BTN = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
-        LBL_DASHBOARD = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         REGISTER_BTN = new javax.swing.JPanel();
         members = new javax.swing.JLabel();
-        LBL_MEMBERS = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         ADD_USER = new javax.swing.JPanel();
         adduser = new javax.swing.JLabel();
-        LBL_ADD_USER = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         MONTH_REPORT = new javax.swing.JPanel();
         monthly = new javax.swing.JLabel();
-        LBL_MonthlyReports = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        SETTINGS = new javax.swing.JPanel();
+        adduser1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         TOPBAR = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        date = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         welcome = new javax.swing.JLabel();
         role = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
         DynamicPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -243,7 +244,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 24));
 
-        SIDEBAR.setBackground(new java.awt.Color(219, 219, 219));
+        SIDEBAR.setBackground(new java.awt.Color(51, 51, 51));
         SIDEBAR.setLayout(null);
 
         DASHBOARD_BTN.setBackground(new java.awt.Color(51, 51, 51));
@@ -264,32 +265,31 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         dashboard.setForeground(new java.awt.Color(255, 255, 255));
         dashboard.setText("DASHBOARD");
 
-        LBL_DASHBOARD.setBackground(new java.awt.Color(255, 255, 255));
-        LBL_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home (1).png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/11.png"))); // NOI18N
 
         javax.swing.GroupLayout DASHBOARD_BTNLayout = new javax.swing.GroupLayout(DASHBOARD_BTN);
         DASHBOARD_BTN.setLayout(DASHBOARD_BTNLayout);
         DASHBOARD_BTNLayout.setHorizontalGroup(
             DASHBOARD_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DASHBOARD_BTNLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(LBL_DASHBOARD)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(dashboard)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         DASHBOARD_BTNLayout.setVerticalGroup(
             DASHBOARD_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DASHBOARD_BTNLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(DASHBOARD_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LBL_DASHBOARD)
-                    .addComponent(dashboard))
+                .addGroup(DASHBOARD_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dashboard)
+                    .addComponent(jLabel4))
                 .addContainerGap())
         );
 
         SIDEBAR.add(DASHBOARD_BTN);
-        DASHBOARD_BTN.setBounds(0, 170, 290, 54);
+        DASHBOARD_BTN.setBounds(0, 200, 290, 50);
 
         REGISTER_BTN.setBackground(new java.awt.Color(51, 51, 51));
         REGISTER_BTN.setPreferredSize(new java.awt.Dimension(214, 60));
@@ -307,34 +307,33 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
         members.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         members.setForeground(new java.awt.Color(255, 255, 255));
-        members.setText("REGISTER");
+        members.setText("MEMBERS");
 
-        LBL_MEMBERS.setBackground(new java.awt.Color(255, 255, 255));
-        LBL_MEMBERS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writing.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/12.png"))); // NOI18N
 
         javax.swing.GroupLayout REGISTER_BTNLayout = new javax.swing.GroupLayout(REGISTER_BTN);
         REGISTER_BTN.setLayout(REGISTER_BTNLayout);
         REGISTER_BTNLayout.setHorizontalGroup(
             REGISTER_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REGISTER_BTNLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(LBL_MEMBERS, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(members)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         REGISTER_BTNLayout.setVerticalGroup(
             REGISTER_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, REGISTER_BTNLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(REGISTER_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(members, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LBL_MEMBERS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14))
+                .addGroup(REGISTER_BTNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(members))
+                .addGap(26, 26, 26))
         );
 
         SIDEBAR.add(REGISTER_BTN);
-        REGISTER_BTN.setBounds(0, 240, 290, 54);
+        REGISTER_BTN.setBounds(0, 250, 290, 50);
 
         ADD_USER.setBackground(new java.awt.Color(51, 51, 51));
         ADD_USER.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -353,32 +352,31 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         adduser.setForeground(new java.awt.Color(255, 255, 255));
         adduser.setText("ADD USER");
 
-        LBL_ADD_USER.setBackground(new java.awt.Color(255, 255, 255));
-        LBL_ADD_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-user (3).png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
 
         javax.swing.GroupLayout ADD_USERLayout = new javax.swing.GroupLayout(ADD_USER);
         ADD_USER.setLayout(ADD_USERLayout);
         ADD_USERLayout.setHorizontalGroup(
             ADD_USERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ADD_USERLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(LBL_ADD_USER)
-                .addGap(30, 30, 30)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
                 .addComponent(adduser)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         ADD_USERLayout.setVerticalGroup(
             ADD_USERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ADD_USERLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(ADD_USERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LBL_ADD_USER)
+                    .addComponent(jLabel6)
                     .addComponent(adduser))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         SIDEBAR.add(ADD_USER);
-        ADD_USER.setBounds(0, 300, 290, 57);
+        ADD_USER.setBounds(0, 350, 290, 50);
 
         MONTH_REPORT.setBackground(new java.awt.Color(51, 51, 51));
         MONTH_REPORT.setPreferredSize(new java.awt.Dimension(214, 60));
@@ -398,62 +396,78 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         monthly.setForeground(new java.awt.Color(255, 255, 255));
         monthly.setText("MONTHLY REPORT");
 
-        LBL_MonthlyReports.setBackground(new java.awt.Color(255, 255, 255));
-        LBL_MonthlyReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calendar.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/13.png"))); // NOI18N
 
         javax.swing.GroupLayout MONTH_REPORTLayout = new javax.swing.GroupLayout(MONTH_REPORT);
         MONTH_REPORT.setLayout(MONTH_REPORTLayout);
         MONTH_REPORTLayout.setHorizontalGroup(
             MONTH_REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MONTH_REPORTLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(LBL_MonthlyReports)
-                .addGap(28, 28, 28)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
                 .addComponent(monthly)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         MONTH_REPORTLayout.setVerticalGroup(
             MONTH_REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MONTH_REPORTLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(MONTH_REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LBL_MonthlyReports)
+                .addContainerGap()
+                .addGroup(MONTH_REPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
                     .addComponent(monthly))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         SIDEBAR.add(MONTH_REPORT);
-        MONTH_REPORT.setBounds(0, 359, 290, 60);
+        MONTH_REPORT.setBounds(0, 300, 290, 50);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fitnesscampsystem/1.png"))); // NOI18N
-        SIDEBAR.add(jLabel7);
-        jLabel7.setBounds(18, 11, 250, 163);
+        SETTINGS.setBackground(new java.awt.Color(51, 51, 51));
+        SETTINGS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SETTINGSMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SETTINGSMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SETTINGSMouseExited(evt);
+            }
+        });
+
+        adduser1.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
+        adduser1.setForeground(new java.awt.Color(255, 255, 255));
+        adduser1.setText("SETTINGS");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/14.png"))); // NOI18N
+
+        javax.swing.GroupLayout SETTINGSLayout = new javax.swing.GroupLayout(SETTINGS);
+        SETTINGS.setLayout(SETTINGSLayout);
+        SETTINGSLayout.setHorizontalGroup(
+            SETTINGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SETTINGSLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(adduser1)
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+        SETTINGSLayout.setVerticalGroup(
+            SETTINGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SETTINGSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(SETTINGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(adduser1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SIDEBAR.add(SETTINGS);
+        SETTINGS.setBounds(0, 400, 290, 50);
 
         getContentPane().add(SIDEBAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 24, 290, 770));
 
         TOPBAR.setBackground(new java.awt.Color(219, 219, 219));
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        date.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        date.setText("jLabel2");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(date)
-                .addContainerGap(203, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(date)
-                .addContainerGap())
-        );
 
         name.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         name.setForeground(new java.awt.Color(51, 51, 51));
@@ -464,6 +478,9 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         welcome.setText("Welcome");
 
         role.setText("jLabel2");
+
+        date.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        date.setText("jLabel2");
 
         javax.swing.GroupLayout TOPBARLayout = new javax.swing.GroupLayout(TOPBAR);
         TOPBAR.setLayout(TOPBARLayout);
@@ -476,21 +493,20 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addComponent(name)
                 .addGap(39, 39, 39)
                 .addComponent(role)
-                .addGap(517, 517, 517)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 671, Short.MAX_VALUE)
+                .addComponent(date)
+                .addGap(95, 95, 95))
         );
         TOPBARLayout.setVerticalGroup(
             TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(name)
-                        .addComponent(welcome)
-                        .addComponent(role)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name)
+                    .addComponent(welcome)
+                    .addComponent(role)
+                    .addComponent(date))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         getContentPane().add(TOPBAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 24, 1080, 60));
@@ -572,11 +588,11 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_MONTH_REPORTMouseExited
 
     private void DASHBOARD_BTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARD_BTNMouseClicked
-        LBL_DASHBOARD.setBackground(new Color(255, 255, 255));
-
-        LBL_MEMBERS.setBackground(new Color(51, 51, 51));
-        LBL_ADD_USER.setBackground(new Color(51, 51, 51));
-        LBL_MonthlyReports.setBackground(new Color(51, 51, 51));
+//        LBL_DASHBOARD.setBackground(new Color(255, 255, 255));
+//
+//        LBL_MEMBERS.setBackground(new Color(51, 51, 51));
+//        LBL_ADD_USER.setBackground(new Color(51, 51, 51));
+//        LBL_MonthlyReports.setBackground(new Color(51, 51, 51));
 
         p1.setVisible(true);
         p2.setVisible(false);
@@ -586,11 +602,11 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_DASHBOARD_BTNMouseClicked
 
     private void REGISTER_BTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REGISTER_BTNMouseClicked
-        LBL_MEMBERS.setBackground(new Color(255, 255, 255));
-
-        LBL_DASHBOARD.setBackground(new Color(51, 51, 51));
-        LBL_ADD_USER.setBackground(new Color(51, 51, 51));
-        LBL_MonthlyReports.setBackground(new Color(51, 51, 51));
+//        LBL_MEMBERS.setBackground(new Color(255, 255, 255));
+//
+//        LBL_DASHBOARD.setBackground(new Color(51, 51, 51));
+//        LBL_ADD_USER.setBackground(new Color(51, 51, 51));
+//        LBL_MonthlyReports.setBackground(new Color(51, 51, 51));
 
         p1.setVisible(false);
         p2.setVisible(true);
@@ -599,11 +615,11 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_REGISTER_BTNMouseClicked
 
     private void ADD_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADD_USERMouseClicked
-        LBL_ADD_USER.setBackground(new Color(255, 255, 255));
-
-        LBL_DASHBOARD.setBackground(new Color(51, 51, 51));
-        LBL_MEMBERS.setBackground(new Color(51, 51, 51));
-        LBL_MonthlyReports.setBackground(new Color(51, 51, 51));
+//        LBL_ADD_USER.setBackground(new Color(255, 255, 255));
+//
+//        LBL_DASHBOARD.setBackground(new Color(51, 51, 51));
+//        LBL_MEMBERS.setBackground(new Color(51, 51, 51));
+//        LBL_MonthlyReports.setBackground(new Color(51, 51, 51));
 
         p1.setVisible(false);
         p2.setVisible(false);
@@ -612,11 +628,11 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_ADD_USERMouseClicked
 
     private void MONTH_REPORTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MONTH_REPORTMouseClicked
-        LBL_MonthlyReports.setBackground(new Color(255, 255, 255));
-
-        LBL_DASHBOARD.setBackground(new Color(51, 51, 51));
-        LBL_MEMBERS.setBackground(new Color(51, 51, 51));
-        LBL_ADD_USER.setBackground(new Color(51, 51, 51));
+//        LBL_MonthlyReports.setBackground(new Color(255, 255, 255));
+//
+//        LBL_DASHBOARD.setBackground(new Color(51, 51, 51));
+//        LBL_MEMBERS.setBackground(new Color(51, 51, 51));
+//        LBL_ADD_USER.setBackground(new Color(51, 51, 51));
 
         p1.setVisible(false);
         p2.setVisible(false);
@@ -635,6 +651,18 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void SETTINGSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGSMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SETTINGSMouseClicked
+
+    private void SETTINGSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGSMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SETTINGSMouseEntered
+
+    private void SETTINGSMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGSMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SETTINGSMouseExited
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -672,23 +700,24 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     public javax.swing.JPanel ADD_USER;
     private javax.swing.JPanel DASHBOARD_BTN;
     private javax.swing.JPanel DynamicPanel;
-    private javax.swing.JLabel LBL_ADD_USER;
-    private javax.swing.JLabel LBL_DASHBOARD;
-    private javax.swing.JLabel LBL_MEMBERS;
-    private javax.swing.JLabel LBL_MonthlyReports;
     private javax.swing.JPanel MONTH_REPORT;
     private javax.swing.JPanel REGISTER_BTN;
+    public javax.swing.JPanel SETTINGS;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JPanel TOPBAR;
     private javax.swing.JLabel adduser;
+    private javax.swing.JLabel adduser1;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel members;
     private javax.swing.JLabel monthly;
     public javax.swing.JLabel name;
