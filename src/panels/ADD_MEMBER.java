@@ -1,7 +1,6 @@
 package panels;
 
 import DataBase.Database;
-import fitnesscampsystem.payment;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -32,12 +31,12 @@ public class ADD_MEMBER extends javax.swing.JPanel {
 
     public ADD_MEMBER() {
         initComponents();
-     
 
         con = Database.ConnectDB();
         start.setVisible(false);
         end.setVisible(false);
         created_at.setVisible(false);
+        yu.setVisible(false);
         update_table();
 
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -45,23 +44,21 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         table.getTableHeader().setBackground(new Color(14, 191, 233));
         table.getTableHeader().setForeground(new Color(135, 135, 135));
         table.setRowHeight(25);
-pay();
+        pay();
 
     }
-    
-     public void pay() {
+
+    public void pay() {
 //        payment p = new payment();
 //        p.setVisible(true);
 
-            
-        
-       if (month.getSelectedItem().equals("1 month")) {
+        if (month.getSelectedItem().equals("1 month")) {
 //           p.jTextField1.setText("500");
-           yu.setText("500");
-      } else if (month.getSelectedItem().equals("2 months")) {
+            yu.setText("500");
+        } else if (month.getSelectedItem().equals("2 months")) {
 //           p.jTextField1.setText("1000");
-          yu.setText("1000");
-     } else if (month.getSelectedItem().equals("3 months")) {
+            yu.setText("1000");
+        } else if (month.getSelectedItem().equals("3 months")) {
 //          p.jTextField1.setText("1500");
             yu.setText("1500");
         } else if (month.getSelectedItem().equals("4 months")) {
@@ -70,15 +67,14 @@ pay();
         } else if (month.getSelectedItem().equals("5 months")) {
 //           p.jTextField1.setText("2500");
             yu.setText("2500");
-       } else if (month.getSelectedItem().equals("6 months")) {
+        } else if (month.getSelectedItem().equals("6 months")) {
 //            p.jTextField1.setText("3000");
-           yu.setText("3000");
+            yu.setText("3000");
         } else if (month.getSelectedItem().equals("1 year")) {
 //            p.jTextField1.setText("6000");
-           yu.setText("6000");
+            yu.setText("6000");
         }
     }
-
 
     private void update_table() {
 
@@ -149,9 +145,9 @@ pay();
         ((JTextField) created_at.getDateEditor().getUiComponent()).setText("");
 
     }
-    
-    public void SAVENA(){
-        
+
+    public void SAVENA() {
+
         if ((firstnameField1.getText().trim().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (lastnameField.getText().trim().isEmpty()) {
@@ -193,7 +189,6 @@ pay();
                 String ct = ((JTextField) created_at.getDateEditor().getUiComponent()).getText();
                 pst.setString(14, ct);
                 pst.setString(15, yu.getText());
-                
 
                 pst.execute();
 
@@ -384,6 +379,8 @@ pay();
 
         jLabel20.setText("Membership");
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, -1, -1));
+
+        start.setDateFormatString("YYYY-MM-DD");
         add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 550, 126, 20));
 
         month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "1 year" }));
@@ -618,7 +615,7 @@ pay();
     private void DELETEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELETEActionPerformed
         int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
         if (opt == 0) {
-            String sql = "DELETE FROM Members_Tbl WHERE Firstname = ? ";
+            String sql = "DELETE FROM Members_Tbl WHERE id = ? ";
             try {
                 pst = con.prepareStatement(sql);
                 pst.setString(1, firstnameField1.getText());
@@ -682,7 +679,7 @@ pay();
     private void SAVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SAVEActionPerformed
 //        pay();
 
-            SAVENA();
+        SAVENA();
 //
 //     
     }//GEN-LAST:event_SAVEActionPerformed

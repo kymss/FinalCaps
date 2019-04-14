@@ -1,12 +1,20 @@
 package fitnesscampsystem;
 
-import java.util.Calendar;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import panels.ADD_MEMBER;
 public class payment extends javax.swing.JFrame {
 
     public payment() {
         initComponents();
+        jTextField1.setEditable(false);
     }
+    
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
+    
 
 
     @SuppressWarnings("unchecked")
@@ -29,7 +37,7 @@ public class payment extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        SEYB.setText("SAVE");
+        SEYB.setText("CONFIRM");
         SEYB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SEYBActionPerformed(evt);
@@ -37,6 +45,11 @@ public class payment extends javax.swing.JFrame {
         });
 
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,6 +100,11 @@ public class payment extends javax.swing.JFrame {
         ADD_MEMBER c =  new  ADD_MEMBER();
         c.SAVENA();
     }//GEN-LAST:event_SEYBActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+          this.setDefaultCloseOperation(Main_Frame_Admin.DISPOSE_ON_CLOSE);
+        close();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
