@@ -2,7 +2,7 @@ package fitnesscampsystem;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import panels.ADD_MEMBER;
+import panels.Members;
 public class payment extends javax.swing.JFrame {
 
     public payment() {
@@ -97,7 +97,7 @@ public class payment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SEYBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEYBActionPerformed
-        ADD_MEMBER c =  new  ADD_MEMBER();
+        Members c =  new  Members();
         c.SAVENA();
     }//GEN-LAST:event_SEYBActionPerformed
 

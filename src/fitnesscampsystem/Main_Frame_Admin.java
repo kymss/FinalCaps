@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import panels.DASHBOARD;
 import panels.Members_Information;
 import panels.Monthly_Reports;
-import panels.ADD_MEMBER;
+import panels.Members;
 import panels.Register;
 
 public class Main_Frame_Admin extends javax.swing.JFrame {
@@ -42,7 +42,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
     GridBagLayout layout = new GridBagLayout();
     DASHBOARD p1;
-    ADD_MEMBER p2;
+    Members p2;
     Register p3;
     Monthly_Reports p4;
 
@@ -61,7 +61,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         setSize(width, height);
 
         p1 = new DASHBOARD();
-        p2 = new ADD_MEMBER();
+        p2 = new Members();
         p3 = new Register();
         p4 = new Monthly_Reports();
 
@@ -352,7 +352,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         adduser.setForeground(new java.awt.Color(255, 255, 255));
         adduser.setText("ADD USER");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/10.png"))); // NOI18N
 
         javax.swing.GroupLayout ADD_USERLayout = new javax.swing.GroupLayout(ADD_USER);
         ADD_USER.setLayout(ADD_USERLayout);
@@ -672,7 +672,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

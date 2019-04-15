@@ -62,7 +62,7 @@ public class Log_in extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
 
-        LOGIN.setBackground(new java.awt.Color(0, 205, 0));
+        LOGIN.setBackground(new java.awt.Color(102, 102, 102));
         LOGIN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LOGIN.setForeground(new java.awt.Color(255, 255, 255));
         LOGIN.setText("LOGIN");
@@ -214,11 +214,11 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGINActionPerformed
 
     private void LOGINMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGINMouseExited
-        LOGIN.setBackground(new Color(104,104,109));
+        LOGIN.setBackground(new Color(102,102,102));
     }//GEN-LAST:event_LOGINMouseExited
 
     private void LOGINMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGINMouseEntered
-        LOGIN.setBackground(new Color(51,51,51));
+        LOGIN.setBackground(new Color(0, 238, 0));
     }//GEN-LAST:event_LOGINMouseEntered
 
     public static void main(String args[]) {

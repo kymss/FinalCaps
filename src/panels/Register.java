@@ -18,25 +18,25 @@ public class Register extends javax.swing.JPanel {
         con = Database.ConnectDB();
     }
 
-    public boolean CheckUsername(String username) {
-        boolean checkUser = false;
-        String sql = ("SELECT * from Login_Tbl WHERE username= ?");
-
-        try {
-            pst.setString(1, username);
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                checkUser = true;
-            }
-
-        } catch (SQLException e) {
-            System.out.println("duh");
-        }
-
-        return checkUser;
-
-    }
+//    public boolean CheckUsername(String username) {
+//        boolean checkUser = false;
+//        String sql = ("SELECT * from Login_Tbl WHERE username= ?");
+//
+//        try {
+//            pst.setString(1, username);
+//            rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                checkUser = true;
+//            }
+//
+//        } catch (SQLException e) {
+//            System.out.println("duh");
+//        }
+//
+//        return checkUser;
+//
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -209,9 +209,11 @@ public class Register extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (RG_CONFIRMPASSWORD.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (CheckUsername(username)) {
-            JOptionPane.showMessageDialog(null, "This username already exist", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        }
+//        else if (CheckUsername(username)) {
+//            JOptionPane.showMessageDialog(null, "This username already exist", "Error", JOptionPane.ERROR_MESSAGE);
+//       }
+else {
             try {
                 pst = con.prepareStatement("INSERT into Login_Tbl(name, lastname, username, password, confirm_password, options) values (?,?,?,?,?,?)");
 

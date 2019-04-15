@@ -1,6 +1,7 @@
 package panels;
 
 import DataBase.Database;
+import fitnesscampsystem.Add_a_Member;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
 
-public class ADD_MEMBER extends javax.swing.JPanel {
+public class Members extends javax.swing.JPanel {
 
     Connection con = null;
     ResultSet rs = null;
@@ -29,7 +30,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
 
     static String setFirstname = "";
 
-    public ADD_MEMBER() {
+    public Members() {
         initComponents();
 
         con = Database.ConnectDB();
@@ -41,8 +42,8 @@ public class ADD_MEMBER extends javax.swing.JPanel {
 
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         table.getTableHeader().setOpaque(false);
-        table.getTableHeader().setBackground(new Color(14, 191, 233));
-        table.getTableHeader().setForeground(new Color(135, 135, 135));
+        table.getTableHeader().setBackground(new Color(48,173,95));
+        table.getTableHeader().setForeground(new Color(255, 250, 250));
         table.setRowHeight(25);
         pay();
 
@@ -76,7 +77,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         }
     }
 
-    private void update_table() {
+    public void update_table() {
 
         try {
             String sql = "SELECT Firstname, Lastname, Start, End FROM Members_Tbl ";
@@ -264,6 +265,11 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         firstnameField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 firstnameField1MouseClicked(evt);
+            }
+        });
+        firstnameField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstnameField1ActionPerformed(evt);
             }
         });
         add(firstnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 221, 25));
@@ -528,8 +534,18 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         add(created_at, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, -1, -1));
         add(yu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 60, -1));
 
+        jButton1.setBackground(new java.awt.Color(48, 173, 95));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
         jButton1.setText("Add Member ");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -630,6 +646,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
                 rs.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
+                
             }
         }
         update_table();
@@ -738,6 +755,15 @@ public class ADD_MEMBER extends javax.swing.JPanel {
         UPDATE.setBackground(new Color(255, 3, 13));
     }//GEN-LAST:event_DELETEMouseExited
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Add_a_Member add = new Add_a_Member();
+        add.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void firstnameField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstnameField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstnameField1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CLEAR;
@@ -783,7 +809,7 @@ public class ADD_MEMBER extends javax.swing.JPanel {
     private javax.swing.JTextField occupationField;
     private javax.swing.JTextField search;
     private com.toedter.calendar.JDateChooser start;
-    private javax.swing.JTable table;
+    public javax.swing.JTable table;
     private javax.swing.JTextField targetweightField;
     private javax.swing.JTextField yu;
     // End of variables declaration//GEN-END:variables

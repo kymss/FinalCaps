@@ -35,8 +35,8 @@ public class DASHBOARD extends javax.swing.JPanel {
         
         allexpired_tbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14 ));
         allexpired_tbl.getTableHeader().setOpaque(false);
-        allexpired_tbl.getTableHeader().setBackground(new Color(14, 191, 233));
-        allexpired_tbl.getTableHeader().setForeground(new Color(135, 135, 135));
+        allexpired_tbl.getTableHeader().setBackground(new Color(48,173,95));
+        allexpired_tbl.getTableHeader().setForeground(new Color(255, 250, 250));
         allexpired_tbl.setRowHeight(25);
         
         
