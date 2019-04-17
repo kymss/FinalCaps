@@ -97,12 +97,12 @@ public class payment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SEYBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEYBActionPerformed
-        Members c =  new  Members();
-        c.SAVENA();
+//        Members c =  new  Members();
+//        c.SAVENA();
     }//GEN-LAST:event_SEYBActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          this.setDefaultCloseOperation(Main_Frame_Admin.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(Main_Frame_Admin.DISPOSE_ON_CLOSE);
         close();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -117,7 +117,7 @@ public class payment extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

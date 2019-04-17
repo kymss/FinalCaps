@@ -47,6 +47,7 @@ public class Log_in extends javax.swing.JFrame {
 
         usernameField.setBackground(new java.awt.Color(51, 51, 51));
         usernameField.setForeground(new java.awt.Color(255, 255, 255));
+        usernameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         usernameField.setBorder(null);
         usernameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         usernameField.setOpaque(false);
@@ -84,6 +85,7 @@ public class Log_in extends javax.swing.JFrame {
 
         passwordField.setBackground(new java.awt.Color(51, 51, 51));
         passwordField.setForeground(new java.awt.Color(255, 255, 255));
+        passwordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         passwordField.setBorder(null);
 
         role.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,7 +231,7 @@ public class Log_in extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

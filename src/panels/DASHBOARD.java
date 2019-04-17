@@ -10,9 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -25,61 +23,31 @@ public class DASHBOARD extends javax.swing.JPanel {
     public DASHBOARD() {
         initComponents();
         con = Database.ConnectDB();
-//        expired_today();
-        all_expired();
 
+        all_expired();
+//
         END.setVisible(false);
         START.setVisible(false);
         ID.setVisible(false);
-        
+//        
         
         allexpired_tbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14 ));
         allexpired_tbl.getTableHeader().setOpaque(false);
         allexpired_tbl.getTableHeader().setBackground(new Color(48,173,95));
         allexpired_tbl.getTableHeader().setForeground(new Color(255, 250, 250));
         allexpired_tbl.setRowHeight(25);
-        
-        
-        
-//        END1.setVisible(false);
-//        START1.setVisible(false);
-//        ID1.setVisible(false);
-
     }
 
-//    private void expired_today() {
-//
-//        try {
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-//            Calendar c = Calendar.getInstance();
-//            c.set(Calendar.DAY_OF_MONTH, 1);
-//            c = Calendar.getInstance(); // reset
-//            String today = dateFormat.format(c.getTime());
-//            String sql = "SELECT Firstname, Lastname, End FROM Members_Tbl WHERE End = '" + today + "'";
-//            pst = con.prepareStatement(sql);
-//            rs = pst.executeQuery();
-//            today_tbl.setModel(DbUtils.resultSetToTableModel(rs));
-//
-//            pst.close();
-//            rs.close();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e);
-//        }
-//    }
 
     public void renewal() {
         DefaultTableModel model = (DefaultTableModel) allexpired_tbl.getModel();
-        int row = allexpired_tbl.getSelectedRow();
-
+        int row = allexpired_tbl.getSelectedRow(); 
         String tc = allexpired_tbl.getModel().getValueAt(row, 0).toString();
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-//            startdate.setText(""+ df.format(d));
-
         Calendar xdate = Calendar.getInstance();
         xdate.add(Calendar.MONTH, 1);
 
         try {
-
             String sql = "SELECT * FROM Members_Tbl WHERE Firstname = '" + tc + "'";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -87,14 +55,10 @@ public class DASHBOARD extends javax.swing.JPanel {
             if (rs.next()) {
                 String id = rs.getString("id");
                 ID.setText(id);
-
                 String Start = rs.getString("Start");
                 START.setText(Start);
-
                 String End = rs.getString("End");
                 END.setText("" + df.format(xdate.getTime()));
-//                END.setText(End);
-
             }
             pst.close();
             rs.close();
@@ -106,6 +70,7 @@ public class DASHBOARD extends javax.swing.JPanel {
     }
 
     public void renewClicked(String Start, String End, String id) {
+        
         String sql = "UPDATE Members_Tbl SET Start = ?, End = ? WHERE id = ?";
 
         try {
@@ -141,6 +106,7 @@ public class DASHBOARD extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -209,6 +175,11 @@ public class DASHBOARD extends javax.swing.JPanel {
         jButton4.setText("DELETE");
         jButton4.setContentAreaFilled(false);
         jButton4.setOpaque(true);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -260,17 +231,32 @@ public class DASHBOARD extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RENEWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RENEWActionPerformed
-
         renewClicked(START.getText(), END.getText(), ID.getText());
         all_expired();
-
     }//GEN-LAST:event_RENEWActionPerformed
 
     private void allexpired_tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allexpired_tblMouseClicked
-
         renewal();
-
     }//GEN-LAST:event_allexpired_tblMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
+        int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
+        if (opt == 0) {
+            String sql = "DELETE FROM Members_Tbl WHERE id = ? ";
+            try {
+                pst = con.prepareStatement(sql);
+                pst.setString(1, ID.getText());
+                pst.execute();
+                //                JOptionPane.showMessageDialog(null,"Deleted")
+                pst.close();
+                rs.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        all_expired();          
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

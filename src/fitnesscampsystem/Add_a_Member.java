@@ -113,6 +113,7 @@ public class Add_a_Member extends javax.swing.JFrame {
 
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Saved!");
+                clear();
                 pst.close();
             } catch (Exception e) {
 //                JOptionPane.showMessageDialog(null, e);
@@ -120,7 +121,35 @@ public class Add_a_Member extends javax.swing.JFrame {
             }
         }
             Members b=new Members();
-            b.update_table();
+            b.Table_view();
+    }
+    
+      public void clear() {
+          //CLear the fields
+        firstnameField.setText("");
+        lastnameField.setText("");
+        sexComboBox.setSelectedIndex(0);
+        contactnumberField.setText("");
+        occupationField.setText("");
+        ((JTextField)  birthdateDateChooser.getDateEditor().getUiComponent()).setText("");
+        addressField.setText("");
+        hobbiesField.setText("");
+        
+        contactpersonField.setText("");
+        contactPersonNumberField.setText("");
+        relationshipField.setText("");
+        healthconcernField.setText("");
+        
+        currentweightField.setText("");
+        targetweightField.setText("");
+        contactpersonField.setText("");
+        month.setSelectedIndex(0);
+        
+        ((JTextField) created_at.getDateEditor().getUiComponent()).setText("");
+        ((JTextField) start.getDateEditor().getUiComponent()).setText("");
+        end.setText("");
+        yu.setText("");
+
     }
     
         public void pay() {
@@ -150,6 +179,10 @@ public class Add_a_Member extends javax.swing.JFrame {
             yu.setText("6000");
         }
     }
+        
+        public void payment(){
+            
+        }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -537,6 +570,8 @@ public class Add_a_Member extends javax.swing.JFrame {
         end.setEditable(false);
         jPanel1.add(end);
         end.setBounds(490, 520, 90, 20);
+
+        created_at.setDateFormatString("yyyy/mm/dd\n");
         jPanel1.add(created_at);
         created_at.setBounds(451, 340, 110, 20);
 
@@ -684,7 +719,7 @@ public class Add_a_Member extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser created_at;
     private javax.swing.JTextField currentweightField;
     public javax.swing.JTextField end;
-    private javax.swing.JTextField firstnameField;
+    public javax.swing.JTextField firstnameField;
     private javax.swing.JTextField healthconcernField;
     private javax.swing.JTextField hobbiesField;
     private javax.swing.JButton jButton1;

@@ -3,6 +3,8 @@ package panels;
 import DataBase.Database;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -21,16 +23,41 @@ public class Monthly_Reports extends javax.swing.JPanel {
     ResultSet rs = null;
     PreparedStatement pst = null;
 
+    GridBagLayout layout = new GridBagLayout();
+    MRsubscriptions p1;
+    MRex p2;
+    MRincome p3;
+
     public Monthly_Reports() {
         initComponents();
         con = Database.ConnectDB();
-        Table_view();
+//        Table_view();
+//        exp();
 
-        monthlyreports.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
-        monthlyreports.getTableHeader().setOpaque(false);
-        monthlyreports.getTableHeader().setBackground(new Color(14, 191, 233));
-        monthlyreports.getTableHeader().setForeground(new Color(135, 135, 135));
-        monthlyreports.setRowHeight(25);
+        p1 = new MRsubscriptions();
+        p2 = new MRex();
+        p3 = new MRincome();
+
+        Dpanel.setLayout(layout);
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.gridx = 0;
+        c.gridy = 0;
+        Dpanel.add(p1, c);
+
+        c.gridx = 0;
+        c.gridy = 0;
+        Dpanel.add(p2, c);
+
+        c.gridx = 0;
+        c.gridy = 0;
+        Dpanel.add(p3, c);
+
+        p1.setVisible(true);
+        p2.setVisible(false);
+        p3.setVisible(false);
+
+        
 
 //       Display();
     }
@@ -73,26 +100,41 @@ public class Monthly_Reports extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(null, e);
 //        }
 //    }
-    
-    public void Table_view(){
-         try {
-             
-//             select * from table where strftime('%m', created_date) == strftime('%m','now')
-            String sql = "select * from Members_Tbl WHERE  strftime('%m', Start) == strftime('%m', 'now')";
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
+//    public void Table_view() {
+//        try {
+//
+////             select * from table where strftime('%m', created_date) == strftime('%m','now')
+//            String sql = "select id, Firstname, Lastname from Members_Tbl WHERE  strftime('%m', Start) == strftime('%m', 'now')";
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            monthlyreports.setModel(DbUtils.resultSetToTableModel(rs));
+//
+//            pst.close();
+//            rs.close();
+//        } catch (Exception e) {
+////            JOptionPane.showMessageDialog(null, e);
+//            System.out.print("no");
+//        }
+//    }
 
-            monthlyreports.setModel(DbUtils.resultSetToTableModel(rs));
-
-            pst.close();
-            rs.close();
-        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e);
-                System.out.print("no");
-        }
-    }
-    
-    
+//     public void exp(){
+//         try {
+//             
+////             select * from table where strftime('%m', created_date) == strftime('%m','now')
+//            String sql = "select id, Firstname, Lastname from Members_Tbl WHERE  strftime('%m', Start) == strftime('%m', 'now')";
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            expi.setModel(DbUtils.resultSetToTableModel(rs));
+//
+//            pst.close();
+//            rs.close();
+//        } catch (Exception e) {
+////            JOptionPane.showMessageDialog(null, e);
+//                System.out.print("no");
+//        }
+//    }
 //    
 //    public void Table_View() {
 //        try {
@@ -112,86 +154,136 @@ public class Monthly_Reports extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(null, e);
 //        }
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        monthlyreports = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        SUBSCRIPTIONS = new javax.swing.JButton();
+        EXPIREDSUBSCRIPTIONS = new javax.swing.JButton();
+        INCOME = new javax.swing.JButton();
+        Dpanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(250, 250, 250));
-
-        monthlyreports = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
-            }
-        };
-        monthlyreports.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Last Name", "Start", " End"
-            }
-        ));
-        monthlyreports.setSelectionBackground(new java.awt.Color(255, 204, 0));
-        jScrollPane1.setViewportView(monthlyreports);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel1.setText("Monthly Reports");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        SUBSCRIPTIONS.setBackground(new java.awt.Color(48, 173, 95));
+        SUBSCRIPTIONS.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        SUBSCRIPTIONS.setForeground(new java.awt.Color(255, 255, 255));
+        SUBSCRIPTIONS.setText("Subscriptions");
+        SUBSCRIPTIONS.setContentAreaFilled(false);
+        SUBSCRIPTIONS.setOpaque(true);
+        SUBSCRIPTIONS.setPreferredSize(new java.awt.Dimension(147, 25));
+        SUBSCRIPTIONS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SUBSCRIPTIONSActionPerformed(evt);
+            }
+        });
+
+        EXPIREDSUBSCRIPTIONS.setBackground(new java.awt.Color(48, 173, 95));
+        EXPIREDSUBSCRIPTIONS.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        EXPIREDSUBSCRIPTIONS.setForeground(new java.awt.Color(255, 255, 255));
+        EXPIREDSUBSCRIPTIONS.setText("Expired Subscriptions");
+        EXPIREDSUBSCRIPTIONS.setContentAreaFilled(false);
+        EXPIREDSUBSCRIPTIONS.setOpaque(true);
+        EXPIREDSUBSCRIPTIONS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EXPIREDSUBSCRIPTIONSActionPerformed(evt);
+            }
+        });
+
+        INCOME.setBackground(new java.awt.Color(48, 173, 95));
+        INCOME.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        INCOME.setForeground(new java.awt.Color(255, 255, 255));
+        INCOME.setText("Income");
+        INCOME.setContentAreaFilled(false);
+        INCOME.setOpaque(true);
+        INCOME.setPreferredSize(new java.awt.Dimension(147, 25));
+        INCOME.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INCOMEActionPerformed(evt);
+            }
+        });
+
+        Dpanel.setBackground(new java.awt.Color(51, 102, 0));
+
+        javax.swing.GroupLayout DpanelLayout = new javax.swing.GroupLayout(Dpanel);
+        Dpanel.setLayout(DpanelLayout);
+        DpanelLayout.setHorizontalGroup(
+            DpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 804, Short.MAX_VALUE)
+        );
+        DpanelLayout.setVerticalGroup(
+            DpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 234, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 284, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SUBSCRIPTIONS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EXPIREDSUBSCRIPTIONS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(INCOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Dpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SUBSCRIPTIONS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EXPIREDSUBSCRIPTIONS)
+                    .addComponent(INCOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
+                .addComponent(Dpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SUBSCRIPTIONSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SUBSCRIPTIONSActionPerformed
+        p1.setVisible(true);
+        p2.setVisible(false);
+        p3.setVisible(false);
+    }//GEN-LAST:event_SUBSCRIPTIONSActionPerformed
+
+    private void EXPIREDSUBSCRIPTIONSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EXPIREDSUBSCRIPTIONSActionPerformed
+        p1.setVisible(false);
+        p2.setVisible(true);
+        p3.setVisible(false);
+    }//GEN-LAST:event_EXPIREDSUBSCRIPTIONSActionPerformed
+
+    private void INCOMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INCOMEActionPerformed
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(true);
+    }//GEN-LAST:event_INCOMEActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel Dpanel;
+    private javax.swing.JButton EXPIREDSUBSCRIPTIONS;
+    private javax.swing.JButton INCOME;
+    private javax.swing.JButton SUBSCRIPTIONS;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable monthlyreports;
     // End of variables declaration//GEN-END:variables
 }
