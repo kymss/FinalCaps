@@ -2,13 +2,21 @@ package panels;
 
 import DataBase.Database;
 import fitnesscampsystem.Add_a_Member;
-import java.awt.Color;
+import fitnesscampsystem.Update_Member;
+import java.awt.Color;       
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -28,14 +36,9 @@ public class Members extends javax.swing.JPanel {
 
     public Members() {
         initComponents();
-
         con = Database.ConnectDB();
-//        start.setVisible(false);
-//        end.setVisible(false);
-//        created_at.setVisible(false);
-//        yu.setVisible(false);
-//        update_table();
         Table_view();
+        ID.setVisible(false);
 
         MEMBERSTABLE.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         MEMBERSTABLE.getTableHeader().setOpaque(false);
@@ -44,6 +47,8 @@ public class Members extends javax.swing.JPanel {
         MEMBERSTABLE.setRowHeight(25);
 //        pay();
     }
+    
+    Update_Member jtRowData = new Update_Member();
 
 //    public void pay() {
 ////        payment p = new payment();
@@ -76,7 +81,8 @@ public class Members extends javax.swing.JPanel {
         try {
 
 //             select * from table where strftime('%m', created_date) == strftime('%m','now')
-            String sql = "select id,Firstname, Lastname, Sex, ContactNumber, Start, End from Members_Tbl";
+            String sql = "select id, Firstname, Lastname,Sex, ContactNumber, Occupation, Address, Hobbies, Contactperson, "
+                    + "ContactPersonNo, Relationship, Healthconcern, Currentweight, Targetweight, Month from Members_Tbl";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -89,6 +95,51 @@ public class Members extends javax.swing.JPanel {
             System.out.print(e);
         }
     }
+    
+//
+    
+    public void pasadon(){
+        int index = MEMBERSTABLE.getSelectedRow();
+        TableModel model = MEMBERSTABLE.getModel();
+        
+        String firstname = model.getValueAt(index, 1).toString();
+        String lastname = model.getValueAt(index, 2).toString();
+        String sex = model.getValueAt(index, 3).toString();
+        String contactnum = model.getValueAt(index, 4).toString();
+        String occupation = model.getValueAt(index, 5).toString();
+        String address = model.getValueAt(index, 6).toString();
+        String hobbies = model.getValueAt(index, 7).toString();        
+        String cperson = model.getValueAt(index, 8).toString(); 
+        String cpersonnum = model.getValueAt(index, 9).toString(); 
+        String relationship = model.getValueAt(index, 10).toString(); 
+        String healthconcern = model.getValueAt(index, 11).toString(); 
+        String curweight = model.getValueAt(index, 12).toString(); 
+        String tarweight = model.getValueAt(index, 13).toString();
+        String membership = model.getValueAt(index, 14).toString(); 
+
+        
+        jtRowData.setVisible(true);
+        jtRowData.pack();
+        jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        jtRowData.firstnameField.setText(firstname);
+        jtRowData.lastnameField.setText(lastname);
+        jtRowData.sexComboBox.setSelectedItem(sex);
+        jtRowData.contactnumberField.setText(contactnum);
+        jtRowData.occupationField.setText(occupation);
+        jtRowData.addressField.setText(address);
+        jtRowData.hobbiesField.setText(hobbies);
+        jtRowData.contactpersonField.setText(cperson);
+        jtRowData.contactPersonNumberField.setText(cpersonnum);
+        jtRowData.relationshipField.setText(relationship);
+        jtRowData.healthconcernField.setText(healthconcern);
+        jtRowData.currentweightField.setText(curweight);
+        jtRowData.targetweightField.setText(tarweight);
+        jtRowData.month.setSelectedItem(membership);
+
+    }
+
+
 
 //    public void update_table() {
 //
@@ -171,11 +222,14 @@ public class Members extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         MEMBERSTABLE = new javax.swing.JTable();
         ID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(250, 250, 250));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DELETE.setBackground(new java.awt.Color(255, 3, 13));
+        DELETE.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        DELETE.setForeground(new java.awt.Color(255, 255, 255));
         DELETE.setText("Delete");
         DELETE.setContentAreaFilled(false);
         DELETE.setOpaque(true);
@@ -192,9 +246,11 @@ public class Members extends javax.swing.JPanel {
                 DELETEActionPerformed(evt);
             }
         });
-        add(DELETE, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 84, 36));
+        add(DELETE, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 84, 34));
 
-        UPDATE.setBackground(new java.awt.Color(11, 181, 255));
+        UPDATE.setBackground(new java.awt.Color(48, 173, 95));
+        UPDATE.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        UPDATE.setForeground(new java.awt.Color(255, 255, 255));
         UPDATE.setText("Update");
         UPDATE.setContentAreaFilled(false);
         UPDATE.setOpaque(true);
@@ -211,8 +267,9 @@ public class Members extends javax.swing.JPanel {
                 UPDATEActionPerformed(evt);
             }
         });
-        add(UPDATE, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 40, 84, 34));
+        add(UPDATE, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 550, 84, 34));
 
+        search.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchKeyPressed(evt);
@@ -221,14 +278,15 @@ public class Members extends javax.swing.JPanel {
                 searchKeyReleased(evt);
             }
         });
-        add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 220, 26));
+        add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 220, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel9.setText("Add a Member ");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, -1));
         add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 540, -1));
 
         jButton1.setBackground(new java.awt.Color(48, 173, 95));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
         jButton1.setText("Add Member ");
@@ -239,7 +297,7 @@ public class Members extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 140, 30));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 60, 150, 40));
 
         MEMBERSTABLE = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -259,11 +317,19 @@ public class Members extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MEMBERSTABLEMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MEMBERSTABLEMouseEntered(evt);
+            }
         });
         jScrollPane1.setViewportView(MEMBERSTABLE);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1010, -1));
-        add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 580, 110, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1010, -1));
+        add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 550, 110, -1));
+
+        jLabel1.setBackground(new java.awt.Color(171, 173, 179));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (1).png"))); // NOI18N
+        jLabel1.setOpaque(true);
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
@@ -321,6 +387,8 @@ public class Members extends javax.swing.JPanel {
     }//GEN-LAST:event_DELETEActionPerformed
 
     private void UPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATEActionPerformed
+
+
 //        String sql = "UPDATE Members_Tbl SET Firstname=?,Lastname= ?, Occupation= ?, Address = ?, ContactNumber= ?, Healthconcern= ?,"
 //                + "Hobbies = ?, Currentweight= ?, Targetweight= ?, Contactperson= ?, Month= ?, Start= ?, End=? WHERE Firstname=? ";
 //        try {
@@ -376,10 +444,18 @@ public class Members extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void MEMBERSTABLEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MEMBERSTABLEMouseClicked
-      int row = MEMBERSTABLE.getSelectedRow();
-      TableModel model = MEMBERSTABLE.getModel();
-      ID.setText(model.getValueAt(row, 0).toString());
+        
+            pasadon();
+            
+//        int row = MEMBERSTABLE.getSelectedRow();
+//        TableModel model = MEMBERSTABLE.getModel();
+//        ID.setText(model.getValueAt(row, 0).toString());
+    
     }//GEN-LAST:event_MEMBERSTABLEMouseClicked
+
+    private void MEMBERSTABLEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MEMBERSTABLEMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MEMBERSTABLEMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -388,6 +464,7 @@ public class Members extends javax.swing.JPanel {
     public javax.swing.JTable MEMBERSTABLE;
     private javax.swing.JButton UPDATE;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator11;
