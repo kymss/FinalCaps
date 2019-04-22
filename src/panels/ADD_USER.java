@@ -2,6 +2,7 @@ package panels;
 
 import DataBase.Database;
 import fitnesscampsystem.Add_a_User;
+import fitnesscampsystem.Main_Frame_Admin;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -33,7 +34,7 @@ public class ADD_USER extends javax.swing.JPanel {
         public void Table_View(){
         
         try {
-            String sql = "SELECT user_id, name, lastname, username, options FROM Login_Tbl ";
+            String sql = "SELECT user_id, firstname, lastname, username, role FROM Login_Tbl ";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -55,7 +56,7 @@ public class ADD_USER extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         USERS = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        ADDUSER = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,15 +81,15 @@ public class ADD_USER extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(USERS);
 
-        jButton1.setBackground(new java.awt.Color(48, 173, 95));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
-        jButton1.setText("Add User Account");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ADDUSER.setBackground(new java.awt.Color(48, 173, 95));
+        ADDUSER.setForeground(new java.awt.Color(255, 255, 255));
+        ADDUSER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
+        ADDUSER.setText("Add User Account");
+        ADDUSER.setContentAreaFilled(false);
+        ADDUSER.setOpaque(true);
+        ADDUSER.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ADDUSERActionPerformed(evt);
             }
         });
 
@@ -99,7 +100,7 @@ public class ADD_USER extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ADDUSER, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -113,22 +114,25 @@ public class ADD_USER extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ADDUSER, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Add_a_User add = new Add_a_User();
-        add.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ADDUSERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDUSERActionPerformed
+        Main_Frame_Admin mf = Main_Frame_Admin.getInstance();
+        mf.setEnabled(false);
+        
+        Add_a_User a = Add_a_User.getInstance();
+        a.setVisible(true);
+    }//GEN-LAST:event_ADDUSERActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ADDUSER;
     private javax.swing.JTable USERS;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

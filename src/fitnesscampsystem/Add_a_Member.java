@@ -1,7 +1,9 @@
 package fitnesscampsystem;
 
 import DataBase.Database;
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +14,21 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 import panels.Members;
 
 public class Add_a_Member extends javax.swing.JFrame {
+
+    private static Add_a_Member instance = null;
+
+    public static Add_a_Member getInstance() {
+        if (instance == null) {
+            instance = new Add_a_Member();
+        }
+        return instance;
+    }
+
+    Members m = Members.getInstance();
 
     Connection con = null;
     ResultSet rs = null;
@@ -24,14 +38,17 @@ public class Add_a_Member extends javax.swing.JFrame {
     public Add_a_Member() {
         initComponents();
         con = Database.ConnectDB();
-
+//        created_at.setVisible(false);
+//        start.setVisible(false);
+        yu.setVisible(false);
+        end.setVisible(false);
     }
 
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
-    
+
     private void computations() {
         SimpleDateFormat datefmt = new SimpleDateFormat("MM/dd/yyyy");
         String dates = ((JTextField) start.getDateEditor().getUiComponent()).getText();
@@ -64,35 +81,32 @@ public class Add_a_Member extends javax.swing.JFrame {
     }
 
     public void Save() {
-
         if ((firstnameField.getText().trim().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (lastnameField.getText().trim().isEmpty()) {
+        } else if (middlenameField.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (sexComboBox.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (birthdateDateChooser == null) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (healthconcernField.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (month.getItemCount() == 0) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
+
             try {
-                String sql = "INSERT INTO Members_Tbl(Firstname,Lastname,Sex,ContactNumber,Occupation,Birthdate,Address,Hobbies,"
-                        + "Contactperson,ContactPersonNo,Relationship,Healthconcern,Currentweight,Targetweight,Month,Start,End,Created_at,Payment)"
+                String sql = "INSERT INTO Members_Tbl(mfirstName,mmiddleName,mlastName,gender,ContactNumber,Occupation,address,Hobbies,"
+                        + "Contactperson,ContactPersonNo,Relationship,Healthconcern,Currentweight,Targetweight,Membership,Start,End,Created_at,Payment)"
                         + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 pst = con.prepareStatement(sql);
                 //PersonalInformation
                 pst.setString(1, firstnameField.getText());
-                pst.setString(2, lastnameField.getText());
+                pst.setString(2, middlenameField.getText());
+                pst.setString(3, lastnameField.getText());
                 String sex = sexComboBox.getSelectedItem().toString();//comboBox
-                pst.setString(3, sex);
-                pst.setString(4, contactnumberField.getText());
-                pst.setString(5, occupationField.getText());
-                String bday = ((JTextField) birthdateDateChooser.getDateEditor().getUiComponent()).getText();//birthdatechooser
-                pst.setString(6, bday);
+                pst.setString(4, sex);
+                pst.setString(5, contactnumberField.getText());
+                pst.setString(6, occupationField.getText());
                 pst.setString(7, addressField.getText());
                 pst.setString(8, hobbiesField.getText());
                 //EmeergencyInformation
@@ -108,7 +122,7 @@ public class Add_a_Member extends javax.swing.JFrame {
                 pst.setString(16, dt);
                 pst.setString(17, end.getText());
                 String ct = ((JTextField) created_at.getDateEditor().getUiComponent()).getText();
-                pst.setString(18, ct);  
+                pst.setString(18, ct);
                 pst.setString(19, yu.getText());
 
                 pst.execute();
@@ -117,45 +131,44 @@ public class Add_a_Member extends javax.swing.JFrame {
                 pst.close();
             } catch (Exception e) {
 //                JOptionPane.showMessageDialog(null, e);
-                    System.out.println(e);
+                System.out.println(e + "eto");
             }
         }
-            Members b=new Members();
-            b.Table_view();
     }
-    
-      public void clear() {
-          //CLear the fields
+
+    public void clear() {
+        //CLear the fields
         firstnameField.setText("");
-        lastnameField.setText("");
+        middlenameField.setText("");
         sexComboBox.setSelectedIndex(0);
         contactnumberField.setText("");
         occupationField.setText("");
-        ((JTextField)  birthdateDateChooser.getDateEditor().getUiComponent()).setText("");
         addressField.setText("");
         hobbiesField.setText("");
-        
+
         contactpersonField.setText("");
         contactPersonNumberField.setText("");
         relationshipField.setText("");
         healthconcernField.setText("");
-        
+
         currentweightField.setText("");
         targetweightField.setText("");
         contactpersonField.setText("");
         month.setSelectedIndex(0);
-        
+
         ((JTextField) created_at.getDateEditor().getUiComponent()).setText("");
         ((JTextField) start.getDateEditor().getUiComponent()).setText("");
         end.setText("");
         yu.setText("");
 
     }
-    
-        public void pay() {
+
+    public void pay() {
+
+//      
+//            
 //        payment p = new payment();
 //        p.setVisible(true);
-
         if (month.getSelectedItem().equals("1 month")) {
 //           p.jTextField1.setText("500");
             yu.setText("500");
@@ -177,12 +190,27 @@ public class Add_a_Member extends javax.swing.JFrame {
         } else if (month.getSelectedItem().equals("1 year")) {
 //            p.jTextField1.setText("6000");
             yu.setText("6000");
+//            }
         }
     }
-        
-        public void payment(){
-            
-        }
+//        public void Table_view() {
+//        try {
+//            String sql = "SELECT members_id, mfirstName, mlastName, gender, ContactNumber, Start, End from Members_Tbl";
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            MEMBERSTABLE.setModel(DbUtils.resultSetToTableModel(rs));
+//
+//            pst.close();
+//            rs.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void payment() {
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -194,12 +222,10 @@ public class Add_a_Member extends javax.swing.JFrame {
         addressField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lastnameField = new javax.swing.JTextField();
+        middlenameField = new javax.swing.JTextField();
         sexComboBox = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        birthdateDateChooser = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         contactnumberField = new javax.swing.JTextField();
         firstnameField = new javax.swing.JTextField();
@@ -230,14 +256,16 @@ public class Add_a_Member extends javax.swing.JFrame {
         ViaPromo = new javax.swing.JRadioButton();
         JustWalkIn = new javax.swing.JRadioButton();
         Internet = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        CANCEL = new javax.swing.JButton();
+        SAVE = new javax.swing.JButton();
         month = new javax.swing.JComboBox();
         jLabel20 = new javax.swing.JLabel();
         yu = new javax.swing.JTextField();
         end = new javax.swing.JTextField();
         created_at = new com.toedter.calendar.JDateChooser();
         start = new com.toedter.calendar.JDateChooser();
+        lastnameField = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -272,40 +300,31 @@ public class Add_a_Member extends javax.swing.JFrame {
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(20, 260, 560, 10);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 11)); // NOI18N
-        jLabel4.setText("Birthdate");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(470, 140, 50, 15);
-
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 11)); // NOI18N
-        jLabel5.setText("Last Name");
+        jLabel5.setText("Middle name");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(280, 70, 60, 30);
+        jLabel5.setBounds(280, 70, 70, 30);
 
-        lastnameField.setBackground(new java.awt.Color(227, 229, 233));
-        lastnameField.setForeground(new java.awt.Color(46, 46, 46));
-        lastnameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        lastnameField.setPreferredSize(new java.awt.Dimension(8, 20));
-        lastnameField.addMouseListener(new java.awt.event.MouseAdapter() {
+        middlenameField.setBackground(new java.awt.Color(227, 229, 233));
+        middlenameField.setForeground(new java.awt.Color(46, 46, 46));
+        middlenameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        middlenameField.setPreferredSize(new java.awt.Dimension(8, 20));
+        middlenameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lastnameFieldMouseClicked(evt);
+                middlenameFieldMouseClicked(evt);
             }
         });
-        jPanel1.add(lastnameField);
-        lastnameField.setBounds(230, 50, 180, 25);
+        jPanel1.add(middlenameField);
+        middlenameField.setBounds(230, 50, 170, 25);
 
         sexComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Male", "Female" }));
         jPanel1.add(sexComboBox);
-        sexComboBox.setBounds(430, 50, 120, 25);
+        sexComboBox.setBounds(430, 110, 120, 25);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 11)); // NOI18N
-        jLabel6.setText("Sex");
+        jLabel6.setText("Gender");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(480, 70, 30, 30);
-
-        birthdateDateChooser.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(birthdateDateChooser);
-        birthdateDateChooser.setBounds(430, 110, 120, 25);
+        jLabel6.setBounds(470, 130, 40, 30);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 11)); // NOI18N
         jLabel7.setText("Contact Number");
@@ -319,6 +338,11 @@ public class Add_a_Member extends javax.swing.JFrame {
         contactnumberField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 contactnumberFieldMouseClicked(evt);
+            }
+        });
+        contactnumberField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contactnumberFieldKeyPressed(evt);
             }
         });
         jPanel1.add(contactnumberField);
@@ -389,6 +413,11 @@ public class Add_a_Member extends javax.swing.JFrame {
         contactPersonNumberField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 contactPersonNumberFieldMouseClicked(evt);
+            }
+        });
+        contactPersonNumberField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contactPersonNumberFieldKeyPressed(evt);
             }
         });
         jPanel1.add(contactPersonNumberField);
@@ -526,29 +555,29 @@ public class Add_a_Member extends javax.swing.JFrame {
         jPanel1.add(Internet);
         Internet.setBounds(350, 540, 70, 23);
 
-        jButton1.setText("Cancel");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CANCEL.setText("Cancel");
+        CANCEL.setContentAreaFilled(false);
+        CANCEL.setOpaque(true);
+        CANCEL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CANCELActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(110, 590, 170, 30);
+        jPanel1.add(CANCEL);
+        CANCEL.setBounds(110, 590, 170, 30);
 
-        jButton2.setBackground(new java.awt.Color(48, 173, 95));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        jButton2.setContentAreaFilled(false);
-        jButton2.setOpaque(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        SAVE.setBackground(new java.awt.Color(48, 173, 95));
+        SAVE.setForeground(new java.awt.Color(255, 255, 255));
+        SAVE.setText("Save");
+        SAVE.setContentAreaFilled(false);
+        SAVE.setOpaque(true);
+        SAVE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                SAVEActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(310, 590, 170, 30);
+        jPanel1.add(SAVE);
+        SAVE.setBounds(320, 590, 170, 30);
 
         month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "1 year" }));
         month.setToolTipText("");
@@ -571,13 +600,30 @@ public class Add_a_Member extends javax.swing.JFrame {
         jPanel1.add(end);
         end.setBounds(490, 520, 90, 20);
 
-        created_at.setDateFormatString("yyyy/mm/dd\n");
+        created_at.setDateFormatString("YYYY-MM-DD\n\n");
         jPanel1.add(created_at);
         created_at.setBounds(451, 340, 110, 20);
 
         start.setDateFormatString("YYYY-MM-DD");
         jPanel1.add(start);
         start.setBounds(450, 370, 110, 20);
+
+        lastnameField.setBackground(new java.awt.Color(227, 229, 233));
+        lastnameField.setForeground(new java.awt.Color(46, 46, 46));
+        lastnameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        lastnameField.setPreferredSize(new java.awt.Dimension(8, 20));
+        lastnameField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lastnameFieldMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lastnameField);
+        lastnameField.setBounds(410, 50, 160, 25);
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI Semilight", 0, 11)); // NOI18N
+        jLabel21.setText("Last Name");
+        jPanel1.add(jLabel21);
+        jLabel21.setBounds(470, 70, 70, 30);
 
         jPanel2.setBackground(new java.awt.Color(48, 173, 95));
         jPanel2.setLayout(null);
@@ -612,16 +658,16 @@ public class Add_a_Member extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addressFieldMouseClicked
 
-    private void lastnameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastnameFieldMouseClicked
-        
-    }//GEN-LAST:event_lastnameFieldMouseClicked
+    private void middlenameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_middlenameFieldMouseClicked
+
+    }//GEN-LAST:event_middlenameFieldMouseClicked
 
     private void contactnumberFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactnumberFieldMouseClicked
-        
+
     }//GEN-LAST:event_contactnumberFieldMouseClicked
 
     private void firstnameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_firstnameFieldMouseClicked
-        DateFormat df = new SimpleDateFormat("MMM-dd-yyyy");
+        DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
         Date date = new Date();
         start.setDate(date);
         created_at.setDate(date);
@@ -658,16 +704,58 @@ public class Add_a_Member extends javax.swing.JFrame {
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
         computations();
         pay();
+
     }//GEN-LAST:event_monthActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CANCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CANCELActionPerformed
         this.setDefaultCloseOperation(Main_Frame_Admin.DISPOSE_ON_CLOSE);
         close();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        Main_Frame_Admin mf = Main_Frame_Admin.getInstance();
+        mf.setEnabled(true);
+        
+        Members m = Members.getInstance();
+        m.Table_view();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//            Members o = Members.getInstance();              
+//                o.Table_view();
+    }//GEN-LAST:event_CANCELActionPerformed
+
+    private void SAVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SAVEActionPerformed
+//        payment i = new payment();
+//        i.setVisible(true);  
+        
+        Members m = Members.getInstance();
+        m.Table_view();
+
         Save();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SAVEActionPerformed
+
+    private void lastnameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastnameFieldMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastnameFieldMouseClicked
+
+    private void contactnumberFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactnumberFieldKeyPressed
+        int key = evt.getKeyCode();
+        if ((key >= evt.VK_0 && key <= evt.VK_9) || (key >= evt.VK_NUMPAD0 && key <= evt.VK_NUMPAD9) || key == KeyEvent.VK_BACK_SPACE) {
+            contactnumberField.setEditable(true);
+            contactnumberField.setBackground(Color.yellow);
+        } else {
+            contactnumberField.setEditable(false);
+        }
+        contactnumberField.setBackground(Color.white);
+    }//GEN-LAST:event_contactnumberFieldKeyPressed
+
+    private void contactPersonNumberFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactPersonNumberFieldKeyPressed
+        int key = evt.getKeyCode();
+        if ((key >= evt.VK_0 && key <= evt.VK_9) || (key >= evt.VK_NUMPAD0 && key <= evt.VK_NUMPAD9) || key == KeyEvent.VK_BACK_SPACE) {
+            contactPersonNumberField.setEditable(true);
+            contactPersonNumberField.setBackground(Color.yellow);
+        } else {
+            contactPersonNumberField.setEditable(false);
+        }
+        contactPersonNumberField.setBackground(Color.white);
+    }//GEN-LAST:event_contactPersonNumberFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -705,25 +793,24 @@ public class Add_a_Member extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CANCEL;
     private javax.swing.JRadioButton ExMember;
     private javax.swing.JRadioButton Internet;
     private javax.swing.JRadioButton JustWalkIn;
+    private javax.swing.JButton SAVE;
     private javax.swing.JRadioButton ThruFriends;
     private javax.swing.JRadioButton ViaPromo;
-    private javax.swing.JTextField addressField;
-    private com.toedter.calendar.JDateChooser birthdateDateChooser;
+    public javax.swing.JTextField addressField;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField contactPersonNumberField;
-    private javax.swing.JTextField contactnumberField;
-    private javax.swing.JTextField contactpersonField;
-    private com.toedter.calendar.JDateChooser created_at;
-    private javax.swing.JTextField currentweightField;
+    public javax.swing.JTextField contactPersonNumberField;
+    public javax.swing.JTextField contactnumberField;
+    public javax.swing.JTextField contactpersonField;
+    public com.toedter.calendar.JDateChooser created_at;
+    public javax.swing.JTextField currentweightField;
     public javax.swing.JTextField end;
     public javax.swing.JTextField firstnameField;
-    private javax.swing.JTextField healthconcernField;
-    private javax.swing.JTextField hobbiesField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public javax.swing.JTextField healthconcernField;
+    public javax.swing.JTextField hobbiesField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -737,8 +824,8 @@ public class Add_a_Member extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -749,13 +836,14 @@ public class Add_a_Member extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField lastnameField;
+    public javax.swing.JTextField lastnameField;
+    public javax.swing.JTextField middlenameField;
     public javax.swing.JComboBox month;
-    private javax.swing.JTextField occupationField;
-    private javax.swing.JTextField relationshipField;
-    private javax.swing.JComboBox<String> sexComboBox;
-    private com.toedter.calendar.JDateChooser start;
-    private javax.swing.JTextField targetweightField;
-    private javax.swing.JTextField yu;
+    public javax.swing.JTextField occupationField;
+    public javax.swing.JTextField relationshipField;
+    public javax.swing.JComboBox<String> sexComboBox;
+    public com.toedter.calendar.JDateChooser start;
+    public javax.swing.JTextField targetweightField;
+    public javax.swing.JTextField yu;
     // End of variables declaration//GEN-END:variables
 }

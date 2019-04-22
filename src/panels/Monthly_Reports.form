@@ -21,40 +21,49 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
-                  <Component id="jSeparator1" alignment="0" min="-2" pref="757" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="SUBSCRIPTIONS" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="EXPIREDSUBSCRIPTIONS" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="INCOME" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="188" max="-2" attributes="0"/>
+                          <Component id="jSeparator1" min="-2" pref="891" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="Dpanel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="Dpanel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="SUBSCRIPTIONS" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="EXPIREDSUBSCRIPTIONS" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="INCOME" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="294" max="32767" attributes="0"/>
+              <EmptySpace pref="177" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="12" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SUBSCRIPTIONS" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="EXPIREDSUBSCRIPTIONS" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="INCOME" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Component id="Dpanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="255" max="32767" attributes="0"/>
+              <EmptySpace pref="128" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -139,16 +148,20 @@
           <Color blue="0" green="66" red="33" type="rgb"/>
         </Property>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="804" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="818" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="234" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="353" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

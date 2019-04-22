@@ -12,15 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Log_in extends javax.swing.JFrame {
-    
+
     Main_Frame_Admin mfa = Main_Frame_Admin.getInstance();
 
     public Log_in() {
         initComponents();
-        role.setVisible(false);
+
+        ROLE.setVisible(false);
     }
-    
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,7 +35,7 @@ public class Log_in extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         LOGIN1 = new javax.swing.JButton();
-        role = new javax.swing.JLabel();
+        ROLE = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -111,7 +110,7 @@ public class Log_in extends javax.swing.JFrame {
             }
         });
 
-        role.setText("jLabel4");
+        ROLE.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,7 +145,7 @@ public class Log_in extends javax.swing.JFrame {
                                 .addComponent(LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(87, 87, 87))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(role)
+                        .addComponent(ROLE)
                         .addGap(177, 177, 177))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -171,8 +170,8 @@ public class Log_in extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LOGIN1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(role)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(ROLE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,7 +182,7 @@ public class Log_in extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -191,7 +190,7 @@ public class Log_in extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
-        
+
         PreparedStatement ps;
         ResultSet rs;
         Connection con;
@@ -209,10 +208,10 @@ public class Log_in extends javax.swing.JFrame {
                 ps.setString(1, uname);
                 ps.setString(2, password);
                 rs = ps.executeQuery();
-                
+
                 if (rs.next()) {
-                    String r = rs.getString("options");
-                    role.setText(r);
+                    String r = rs.getString("role");
+                    ROLE.setText(r);
                     mfa.setVisible(true);
                     mfa.pack();
                     mfa.name.setText(uname);
@@ -221,10 +220,10 @@ public class Log_in extends javax.swing.JFrame {
                     mfa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     this.dispose();
                     setVisible(false);
-                    
-                    if(role.getText().equals("Admin")){
+
+                    if (ROLE.getText().equals("Admin")) {
                         mfa.ADD_USER.setVisible(true);
-                    }else if(role.getText().equals("User")){
+                    } else if (ROLE.getText().equals("User")) {
                         mfa.ADD_USER.setVisible(false);
                     }
                 } else {
@@ -233,6 +232,7 @@ public class Log_in extends javax.swing.JFrame {
                 ps.close();
                 rs.close();
             } catch (SQLException ex) {
+                System.out.println("wla");
                 Logger.getLogger(Log_in.class.getName()).log(Level.SEVERE, null, ex);
 
             }
@@ -240,7 +240,7 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGINActionPerformed
 
     private void LOGINMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGINMouseExited
-        LOGIN.setBackground(new Color(102,102,102));
+        LOGIN.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_LOGINMouseExited
 
     private void LOGINMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGINMouseEntered
@@ -248,15 +248,15 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGINMouseEntered
 
     private void LOGIN1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGIN1MouseEntered
-        // TODO add your handling code here:
+         LOGIN1.setBackground(new Color(0, 238, 0));
     }//GEN-LAST:event_LOGIN1MouseEntered
 
     private void LOGIN1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGIN1MouseExited
-        // TODO add your handling code here:
+         LOGIN1.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_LOGIN1MouseExited
 
     private void LOGIN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGIN1ActionPerformed
-        
+           this.dispose();
     }//GEN-LAST:event_LOGIN1ActionPerformed
 
     public static void main(String args[]) {
@@ -294,6 +294,7 @@ public class Log_in extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LOGIN;
     private javax.swing.JButton LOGIN1;
+    private javax.swing.JLabel ROLE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -301,7 +302,6 @@ public class Log_in extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JLabel role;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

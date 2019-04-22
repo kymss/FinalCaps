@@ -21,7 +21,7 @@ import panels.Monthly_Reports;
 import panels.Members;
 import panels.ADD_USER;
 import panels.AttendanceMembers;
-import panels.Settings;
+
 
 public class Main_Frame_Admin extends javax.swing.JFrame {
 
@@ -45,7 +45,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     ADD_USER p3;
     Monthly_Reports p4;
     AttendanceMembers p5;
-    Settings p6;
+//    Settings p6;
 
     public Main_Frame_Admin() {
         initComponents();
@@ -54,7 +54,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         ShowDate();
         ShowTime();
         role.setVisible(false);
-//        countAllMembers();
+
+
 
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension dim = new Dimension(tk.getScreenSize());
@@ -68,7 +69,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         p3 = new ADD_USER();
         p4 = new Monthly_Reports();
         p5 = new AttendanceMembers();
-        p6 = new Settings();
+//        p6 = new Settings();
 
         DynamicPanel.setLayout(layout);
         GridBagConstraints c = new GridBagConstraints();
@@ -93,16 +94,16 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         c.gridy = 0;
         DynamicPanel.add(p5, c);
 
-        c.gridx = 0;
-        c.gridy = 0;
-        DynamicPanel.add(p6, c);
+//        c.gridx = 0;
+//        c.gridy = 0;
+//        DynamicPanel.add(p6, c);
 
         p1.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
         p4.setVisible(false);
         p5.setVisible(false);
-        p6.setVisible(false);
+//        p6.setVisible(false);
 
         if (p1.isVisible()) {
             DASHBOARD_BTN.setBackground(new Color(20, 31, 42));
@@ -122,12 +123,12 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
         }
     }
-
-    public Main_Frame_Admin(String uname) {
-        initComponents();
-        name.setText(uname + "!!");
-
-    }
+//
+//    public Main_Frame_Admin(String uname) {
+//        initComponents();
+//        name.setText(uname + "!!");
+//
+//    }
 
     void ShowDate() {
         Date d = new Date();
@@ -167,9 +168,6 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         MONTH_REPORT = new javax.swing.JPanel();
         monthly = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        SETTINGS = new javax.swing.JPanel();
-        adduser1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         LOGOUT = new javax.swing.JPanel();
         LOG = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -386,7 +384,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         );
 
         SIDEBAR.add(ADD_USER);
-        ADD_USER.setBounds(0, 570, 250, 50);
+        ADD_USER.setBounds(0, 620, 250, 50);
 
         MONTH_REPORT.setBackground(new java.awt.Color(16, 22, 28));
         MONTH_REPORT.setPreferredSize(new java.awt.Dimension(214, 60));
@@ -431,49 +429,6 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
         SIDEBAR.add(MONTH_REPORT);
         MONTH_REPORT.setBounds(0, 260, 250, 50);
-
-        SETTINGS.setBackground(new java.awt.Color(16, 22, 28));
-        SETTINGS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SETTINGSMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SETTINGSMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                SETTINGSMouseExited(evt);
-            }
-        });
-
-        adduser1.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        adduser1.setForeground(new java.awt.Color(255, 255, 255));
-        adduser1.setText("SETTINGS");
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/14.png"))); // NOI18N
-
-        javax.swing.GroupLayout SETTINGSLayout = new javax.swing.GroupLayout(SETTINGS);
-        SETTINGS.setLayout(SETTINGSLayout);
-        SETTINGSLayout.setHorizontalGroup(
-            SETTINGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SETTINGSLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(adduser1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
-        );
-        SETTINGSLayout.setVerticalGroup(
-            SETTINGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SETTINGSLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(SETTINGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adduser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        SIDEBAR.add(SETTINGS);
-        SETTINGS.setBounds(0, 620, 250, 50);
 
         LOGOUT.setBackground(new java.awt.Color(16, 22, 28));
         LOGOUT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -659,7 +614,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             ADD_USER.setBackground(new Color(16, 22, 28));
             MONTH_REPORT.setBackground(new Color(16, 22, 28));
             ATTENDANCE.setBackground(new Color(16, 22, 28));
-            SETTINGS.setBackground(new Color(16, 22, 28));
+//            SETTINGS.setBackground(new Color(16, 22, 28));
         } else {
             REGISTER_BTN.setBackground(new Color(16, 22, 28));
         }
@@ -674,7 +629,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             ADD_USER.setBackground(new Color(16, 22, 28));
             MONTH_REPORT.setBackground(new Color(16, 22, 28));
             ATTENDANCE.setBackground(new Color(16, 22, 28));
-            SETTINGS.setBackground(new Color(16, 22, 28));
+//            SETTINGS.setBackground(new Color(16, 22, 28));
         } else {
             REGISTER_BTN.setBackground(new Color(16, 22, 28));
         }
@@ -689,7 +644,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             REGISTER_BTN.setBackground(new Color(16, 22, 28));
             MONTH_REPORT.setBackground(new Color(16, 22, 28));
             ATTENDANCE.setBackground(new Color(16, 22, 28));
-            SETTINGS.setBackground(new Color(16, 22, 28));
+//            SETTINGS.setBackground(new Color(16, 22, 28));
         } else {
             ADD_USER.setBackground(new Color(16, 22, 28));
         }
@@ -704,7 +659,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             REGISTER_BTN.setBackground(new Color(16, 22, 28));
             MONTH_REPORT.setBackground(new Color(20, 31, 42));
             ATTENDANCE.setBackground(new Color(16, 22, 28));
-            SETTINGS.setBackground(new Color(16, 22, 28));
+//            SETTINGS.setBackground(new Color(16, 22, 28));
         } else {
             ADD_USER.setBackground(new Color(16, 22, 28));
         }
@@ -722,7 +677,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         p3.setVisible(false);
         p4.setVisible(false);
         p5.setVisible(false);
-        p6.setVisible(false);
+//        p6.setVisible(false);
 
     }//GEN-LAST:event_DASHBOARD_BTNMouseClicked
 
@@ -738,7 +693,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         p3.setVisible(false);
         p4.setVisible(false);
         p5.setVisible(false);
-        p6.setVisible(false);
+//        p6.setVisible(false);
     }//GEN-LAST:event_REGISTER_BTNMouseClicked
 
     private void ADD_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADD_USERMouseClicked
@@ -753,7 +708,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         p3.setVisible(true);
         p4.setVisible(false);
         p5.setVisible(false);
-        p6.setVisible(false);
+//        p6.setVisible(false);
     }//GEN-LAST:event_ADD_USERMouseClicked
 
     private void MONTH_REPORTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MONTH_REPORTMouseClicked
@@ -768,7 +723,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         p3.setVisible(false);
         p4.setVisible(true);
         p5.setVisible(false);
-        p6.setVisible(false);
+//        p6.setVisible(false);
     }//GEN-LAST:event_MONTH_REPORTMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -782,34 +737,6 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jButton2MouseClicked
-
-    private void SETTINGSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGSMouseClicked
-        p1.setVisible(false);
-        p2.setVisible(false);
-        p3.setVisible(false);
-        p4.setVisible(false);
-        p5.setVisible(false);
-        p6.setVisible(true);
-    }//GEN-LAST:event_SETTINGSMouseClicked
-
-    private void SETTINGSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGSMouseEntered
-        SETTINGS.setBackground(new Color(20, 31, 42));
-
-    }//GEN-LAST:event_SETTINGSMouseEntered
-
-    private void SETTINGSMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGSMouseExited
-        SETTINGS.setBackground(new Color(16, 22, 28));
-        if (p6.isVisible()) {
-            ADD_USER.setBackground(new Color(16, 22, 28));
-            DASHBOARD_BTN.setBackground(new Color(16, 22, 28));
-            REGISTER_BTN.setBackground(new Color(16, 22, 28));
-            MONTH_REPORT.setBackground(new Color(16, 22, 28));
-            ATTENDANCE.setBackground(new Color(16, 22, 28));
-            SETTINGS.setBackground(new Color(20, 31, 42));
-        } else {
-            SETTINGS.setBackground(new Color(16, 22, 28));
-        }
-    }//GEN-LAST:event_SETTINGSMouseExited
 
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
         // TODO add your handling code here:
@@ -830,7 +757,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         p3.setVisible(false);
         p4.setVisible(false);
         p5.setVisible(true);
-        p6.setVisible(false);
+//        p6.setVisible(false);
     }//GEN-LAST:event_ATTENDANCEMouseClicked
 
     private void ATTENDANCEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ATTENDANCEMouseEntered
@@ -846,7 +773,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             REGISTER_BTN.setBackground(new Color(16, 22, 28));
             MONTH_REPORT.setBackground(new Color(16, 22, 28));
             ATTENDANCE.setBackground(new Color(20, 31, 42));
-            SETTINGS.setBackground(new Color(16, 22, 28));
+//            SETTINGS.setBackground(new Color(16, 22, 28));
         } else {
             ATTENDANCE.setBackground(new Color(16, 22, 28));
         }
@@ -893,11 +820,9 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     public javax.swing.JPanel LOGOUT;
     private javax.swing.JPanel MONTH_REPORT;
     private javax.swing.JPanel REGISTER_BTN;
-    public javax.swing.JPanel SETTINGS;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JPanel TOPBAR;
     private javax.swing.JLabel adduser;
-    private javax.swing.JLabel adduser1;
     private javax.swing.JLabel adduser3;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel date;
@@ -907,7 +832,6 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

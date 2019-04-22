@@ -1,12 +1,27 @@
 package fitnesscampsystem;
 
+import DataBase.Database;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import panels.Members;
+import fitnesscampsystem.Add_a_Member;
+
 public class payment extends javax.swing.JFrame {
+    
+    Add_a_Member add = Add_a_Member.getInstance();
+    
+        PreparedStatement pst;
+        ResultSet rs;
+        Connection con;
 
     public payment() {
         initComponents();
+        con = Database.ConnectDB();
         jTextField1.setEditable(false);
     }
     
@@ -14,7 +29,93 @@ public class payment extends javax.swing.JFrame {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
+//    public void Save() {
+//
+//        if ((firstnameField.getText().trim().isEmpty())) {
+//            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else if (lastnameField.getText().trim().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else if (sexComboBox.getItemCount() == 0) {
+//            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+//        }    else if (healthconcernField.getText().trim().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else if (month.getItemCount() == 0) {
+//            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            try {
+//                String sql = "INSERT INTO Members_Tbl(Firstname,Lastname,Sex,ContactNumber,Occupation,Address,Hobbies,"
+//                        + "Contactperson,ContactPersonNo,Relationship,Healthconcern,Currentweight,Targetweight,Month,Start,End,Created_at,Payment)"
+//                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//
+//                pst = con.prepareStatement(sql);
+//                //PersonalInformation
+//                pst.setString(1, firstnameField.getText());
+//                pst.setString(2, lastnameField.getText());
+//                String sex = sexComboBox.getSelectedItem().toString();//comboBox
+//                pst.setString(3, sex);
+//                pst.setString(4, contactnumberField.getText());
+//                pst.setString(5, occupationField.getText());
+////                String bday = ((JTextField) birthdateDateChooser.getDateEditor().getUiComponent()).getText();//birthdatechooser
+////                pst.setString(6, bday);
+//                pst.setString(6, addressField.getText());
+//                pst.setString(7, hobbiesField.getText());
+//                //EmeergencyInformation
+//                pst.setString(8, contactpersonField.getText());
+//                pst.setString(9, contactPersonNumberField.getText());
+//                pst.setString(10, relationshipField.getText());
+//                pst.setString(11, healthconcernField.getText());
+//                pst.setString(12, currentweightField.getText());
+//                pst.setString(13, targetweightField.getText());
+//                String hv = month.getSelectedItem().toString();//membership
+//                pst.setString(14, hv);
+//                String dt = ((JTextField) start.getDateEditor().getUiComponent()).getText();
+//                pst.setString(15, dt);
+//                pst.setString(16, end.getText());
+//                String ct = ((JTextField) created_at.getDateEditor().getUiComponent()).getText();
+//                pst.setString(17, ct);  
+//                pst.setString(18, yu.getText());
+//
+//                pst.execute();
+//                JOptionPane.showMessageDialog(null, "Saved!");
+//                clear();
+//                pst.close();
+//            } catch (Exception e) {
+////                JOptionPane.showMessageDialog(null, e);
+//                    System.out.println(e+"eto");
+//                    
+//            }
+//        }
+//            Members b=new Members();
+//            b.Table_view();
+//    }
     
+//      public void clear() {
+//          //CLear the fields
+//        firstnameField.setText("");
+//        lastnameField.setText("");
+//        sexComboBox.setSelectedIndex(0);
+//        contactnumberField.setText("");
+//        occupationField.setText("");
+////        ((JTextField)  birthdateDateChooser.getDateEditor().getUiComponent()).setText("");
+//        addressField.setText("");
+//        hobbiesField.setText("");
+//        
+//        contactpersonField.setText("");
+//        contactPersonNumberField.setText("");
+//        relationshipField.setText("");
+//        healthconcernField.setText("");
+//        
+//        currentweightField.setText("");
+//        targetweightField.setText("");
+//        contactpersonField.setText("");
+//        month.setSelectedIndex(0);
+//        
+//        ((JTextField) created_at.getDateEditor().getUiComponent()).setText("");
+//        ((JTextField) start.getDateEditor().getUiComponent()).setText("");
+//        end.setText("");
+//        yu.setText("");
+//
+//    }
 
 
     @SuppressWarnings("unchecked")
@@ -28,6 +129,7 @@ public class payment extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -74,11 +176,11 @@ public class payment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Payment)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SEYB)
                     .addComponent(jButton2))
-                .addGap(40, 40, 40))
+                .addGap(83, 83, 83))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,8 +199,54 @@ public class payment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SEYBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEYBActionPerformed
-//        Members c =  new  Members();
-//        c.SAVENA();
+        Add_a_Member c = Add_a_Member.getInstance();
+        c.Save();
+//
+//
+//
+//            try {
+//                String sql = "INSERT INTO Members_Tbl(Firstname,Lastname,Sex,ContactNumber,Occupation,Address,Hobbies,"
+//                        + "Contactperson,ContactPersonNo,Relationship,Healthconcern,Currentweight,Targetweight,Month,Start,End,Created_at,Payment)"
+//                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//
+//                pst = con.prepareStatement(sql);
+//                //PersonalInformation
+//                pst.setString(1, firstnameField.getText());
+//                pst.setString(2, lastnameField.getText());
+//                String sex = sexComboBox.getSelectedItem().toString();//comboBox
+//                pst.setString(3, sex);
+//                pst.setString(4, contactnumberField.getText());
+//                pst.setString(5, occupationField.getText());
+////                String bday = ((JTextField) birthdateDateChooser.getDateEditor().getUiComponent()).getText();//birthdatechooser
+////                pst.setString(6, bday);
+//                pst.setString(6, addressField.getText());
+//                pst.setString(7, hobbiesField.getText());
+//                //EmeergencyInformation
+//                pst.setString(8, contactpersonField.getText());
+//                pst.setString(9, contactPersonNumberField.getText());
+//                pst.setString(10, relationshipField.getText());
+//                pst.setString(11, healthconcernField.getText());
+//                pst.setString(12, currentweightField.getText());
+//                pst.setString(13, targetweightField.getText());
+//                String hv = month.getSelectedItem().toString();//membership
+//                pst.setString(14, hv);
+//                String dt = ((JTextField) start.getDateEditor().getUiComponent()).getText();
+//                pst.setString(15, dt);
+//                pst.setString(16, end.getText());
+//                String ct = ((JTextField) created_at.getDateEditor().getUiComponent()).getText();
+//                pst.setString(17, ct);  
+//                pst.setString(18, yu.getText());
+//
+//                pst.execute();
+//                JOptionPane.showMessageDialog(null, "Saved!");
+////                clear();
+//                pst.close();
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, e);
+////                    System.out.println(e+"eto");
+//                    
+//            }
+        
     }//GEN-LAST:event_SEYBActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

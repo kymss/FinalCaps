@@ -28,7 +28,7 @@ public class Members_Information extends javax.swing.JPanel {
     private void update_table() {
 
         try {
-            String sql = "SELECT Firstname, Lastname, Occupation, Address, ContactNumber, Healthconcern, Hobbies,"
+            String sql = "SELECT mfirstName, mlastName, Occupation, address, ContactNumber, Healthconcern, Hobbies,"
                     + " Currentweight, Targetweight, Contactperson, Start, End FROM Members_Tbl ";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -52,18 +52,18 @@ public class Members_Information extends javax.swing.JPanel {
         String tc = Information_Table.getModel().getValueAt(row, 0).toString();
 
         try {
-            String sql = "SELECT * FROM Members_Tbl WHERE Firstname = '" + tc + "'";
+            String sql = "SELECT * FROM Members_Tbl WHERE mfirstName = '" + tc + "'";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                String name = rs.getString("Firstname");
+                String name = rs.getString("mfirstName");
                 Dp_name.setText(name);
-                String lastname = rs.getString("Lastname");
+                String lastname = rs.getString("mlastName");
                 Dp_lastname.setText(lastname);
                 String occupation = rs.getString("Occupation");
                 Dp_Occupation.setText(occupation);
-                String address = rs.getString("Address");
+                String address = rs.getString("address");
                 Dp_address.setText(address);
                 String contactnumber = rs.getString("ContactNumber");
                 Dp_contactno.setText(contactnumber);
@@ -344,8 +344,8 @@ public class Members_Information extends javax.swing.JPanel {
 
     private void UPDATE_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATE_BTNActionPerformed
 
-        String sql = "UPDATE Members_Tbl SET Firstname= ?,Lastname = ?, Occupation = ?, Address = ?, ContactNumber = ?, Healthconcern = ?,"
-                + "Hobbies = ?, Currentweight = ?, Targetweight = ?, Contactperson = ?, Start = ?, End = ? WHERE Firstname=? ";
+        String sql = "UPDATE Members_Tbl SET mfirstName= ?,mlastName = ?, Occupation = ?, address = ?, ContactNumber = ?, Healthconcern = ?,"
+                + "Hobbies = ?, Currentweight = ?, Targetweight = ?, Contactperson = ?, Start = ?, End = ? WHERE mfirstName=? ";
         try {
             con = Database.ConnectDB();
             PreparedStatement pst = con.prepareStatement(sql);

@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -82,7 +82,7 @@
                           <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="role" min="-2" max="-2" attributes="0"/>
+                          <Component id="ROLE" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -111,8 +111,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="LOGIN1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="role" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <Component id="ROLE" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="57" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -241,7 +241,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LOGIN1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="role">
+        <Component class="javax.swing.JLabel" name="ROLE">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel4"/>
           </Properties>

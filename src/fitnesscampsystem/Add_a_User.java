@@ -13,6 +13,14 @@ public class Add_a_User extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    private static Add_a_User instance = null;    
+    public static Add_a_User getInstance() {
+      if(instance == null) {
+         instance = new Add_a_User();
+      }
+      return instance;
+    }
 
     public Add_a_User() {
         initComponents();
@@ -38,7 +46,6 @@ public class Add_a_User extends javax.swing.JFrame {
             if(rs.next()){
                     checkUser = true;
             }
-            
         } catch (Exception e) {
         }
         return checkUser;
@@ -230,6 +237,8 @@ public class Add_a_User extends javax.swing.JFrame {
     private void CANCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CANCELActionPerformed
         this.setDefaultCloseOperation(Main_Frame_Admin.DISPOSE_ON_CLOSE);
         close();
+        Main_Frame_Admin mf = Main_Frame_Admin.getInstance();
+        mf.setEnabled(true);
     }//GEN-LAST:event_CANCELActionPerformed
 
     private void RG_NAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RG_NAMEActionPerformed
@@ -237,12 +246,12 @@ public class Add_a_User extends javax.swing.JFrame {
     }//GEN-LAST:event_RG_NAMEActionPerformed
 
     private void SAVE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SAVE1ActionPerformed
-        String name = RG_NAME.getText();
+        String fname = RG_NAME.getText();
         String lastname = RG_LASTNAME.getText();
         String username = RG_USERNAME.getText();
         String password = new String(RG_PASSWORD.getPassword());   
         String confirmpassword = new String(RG_CONFIRMPASSWORD.getPassword()); 
-        String opt = jComboBox1.getSelectedItem().toString();
+        String rl = jComboBox1.getSelectedItem().toString();
       
         
         if((RG_NAME.getText().trim().isEmpty())){
@@ -264,16 +273,16 @@ public class Add_a_User extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Username already exists","Error", JOptionPane.ERROR_MESSAGE);
                 }
         
-            String query = "INSERT into Login_Tbl(name, lastname, username, password, confirm_password, options) values (?,?,?,?,?,?)";
+           String query = "INSERT into Login_Tbl( username,mfirstName, mlastName, password, confirm_password, options) values (?,?,?,?,?,?)";
         try{
 //                pst=con.prepareStatement("INSERT into Login_Tbl(name, lastname, username, password, confirm_password, options) values (?,?,?,?,?,?)");
                 pst = con.prepareStatement(query);
-                pst.setString(1, RG_NAME.getText());
+                pst.setString(1, RG_USERNAME.getText());
                 pst.setString(2, RG_LASTNAME.getText());
-                pst.setString(3, RG_USERNAME.getText());
+                pst.setString(3, RG_NAME.getText());
                 pst.setString(4, password);
                 pst.setString(5, confirmpassword);
-                pst.setString(6, opt);
+                pst.setString(6, rl);
                 
                 if(password.equals(confirmpassword)){
                     pst.executeUpdate();

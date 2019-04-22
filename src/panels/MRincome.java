@@ -39,7 +39,7 @@ public class MRincome extends javax.swing.JPanel {
      public void Table_view() {
         try {
 //             select * from table where strftime('%m', created_date) == strftime('%m','now')
-            String sql = "SELECT id, Firstname, Lastname, Payment from Members_Tbl WHERE  strftime('%m', Start) == strftime('%m', 'now')";
+            String sql = "SELECT members_id, mfirstName, mlastName, Payment from Members_Tbl WHERE  strftime('%m', Start) == strftime('%m', 'now')";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -119,12 +119,11 @@ public class MRincome extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(jLabel1)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
