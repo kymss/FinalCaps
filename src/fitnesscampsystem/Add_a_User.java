@@ -273,7 +273,7 @@ public class Add_a_User extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Username already exists","Error", JOptionPane.ERROR_MESSAGE);
                 }
         
-           String query = "INSERT into Login_Tbl( username,mfirstName, mlastName, password, confirm_password, options) values (?,?,?,?,?,?)";
+           String query = "INSERT into Login_Tbl( username, firstname, lastname, password, confirm_password, role) values (?,?,?,?,?,?)";
         try{
 //                pst=con.prepareStatement("INSERT into Login_Tbl(name, lastname, username, password, confirm_password, options) values (?,?,?,?,?,?)");
                 pst = con.prepareStatement(query);
