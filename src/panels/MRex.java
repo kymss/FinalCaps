@@ -33,6 +33,7 @@ public class MRex extends javax.swing.JPanel {
         ExpiredSubs.getTableHeader().setBackground(new Color(48, 173, 95));
         ExpiredSubs.getTableHeader().setForeground(new Color(255, 255, 255));
         ExpiredSubs.setRowHeight(25);
+        ExpiredSubs.getTableHeader().setReorderingAllowed(false);
     }
     
     

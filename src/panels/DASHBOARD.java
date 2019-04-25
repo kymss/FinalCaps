@@ -46,6 +46,7 @@ public class DASHBOARD extends javax.swing.JPanel {
         allexpired_tbl.getTableHeader().setBackground(new Color(48, 173, 95));
         allexpired_tbl.getTableHeader().setForeground(new Color(255, 250, 250));
         allexpired_tbl.setRowHeight(25);
+        allexpired_tbl.getTableHeader().setReorderingAllowed(false);
     }
 
     public void renewal() {

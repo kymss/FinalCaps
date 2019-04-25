@@ -26,6 +26,7 @@ public final class MRsubscriptions extends javax.swing.JPanel {
         monthlyreports.getTableHeader().setBackground(new Color(48, 173, 95));
         monthlyreports.getTableHeader().setForeground(new Color(255, 255, 255));
         monthlyreports.setRowHeight(25);
+        monthlyreports.getTableHeader().setReorderingAllowed(false);
     }
 
     public void Table_view() {

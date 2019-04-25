@@ -43,6 +43,7 @@ public class AttendanceMembers extends javax.swing.JPanel {
         ATTENDANCE_TBL.getTableHeader().setBackground(new Color(48, 173, 95));
         ATTENDANCE_TBL.getTableHeader().setForeground(new Color(255, 255, 255));
         ATTENDANCE_TBL.setRowHeight(25);
+        ATTENDANCE_TBL.getTableHeader().setReorderingAllowed(false);
     }
 
     void setTable() {

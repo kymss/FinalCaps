@@ -49,6 +49,7 @@ public class Members extends javax.swing.JPanel {
         MEMBERSTABLE.getTableHeader().setBackground(new Color(48, 173, 95));
         MEMBERSTABLE.getTableHeader().setForeground(new Color(255, 250, 250));
         MEMBERSTABLE.setRowHeight(25);
+        MEMBERSTABLE.getTableHeader().setReorderingAllowed(false);
 
 //        MID = new JLabel();
 //        MID.setBounds(0,0,0,0);
@@ -342,7 +343,7 @@ public class Members extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ADDMEMBERS, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

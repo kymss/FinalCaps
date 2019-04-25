@@ -28,6 +28,7 @@ public class ADD_USER extends javax.swing.JPanel {
         USERS.getTableHeader().setBackground(new Color(48, 173, 95));
         USERS.getTableHeader().setForeground(new Color(255, 250, 250));
         USERS.setRowHeight(25);
+        USERS.getTableHeader().setReorderingAllowed(false);
         Table_View();
     }
 
@@ -277,8 +278,8 @@ public class ADD_USER extends javax.swing.JPanel {
         
         
             Database db = Database.getInstance();
-            
             db.updateAccount(
+                    
             uname.getText(),
             fname.getText(),
             lname.getText(),
@@ -313,7 +314,6 @@ public class ADD_USER extends javax.swing.JPanel {
                 Table_View();
             } catch (Exception e) {
                 e.printStackTrace();
-                //                JOptionPane.showMessageDialog(null, e);
             }
         }
 

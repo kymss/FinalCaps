@@ -34,6 +34,7 @@ public class MRincome extends javax.swing.JPanel {
         income.getTableHeader().setBackground(new Color(48, 173, 95));
         income.getTableHeader().setForeground(new Color(255, 255, 255));
         income.setRowHeight(25);
+        income.getTableHeader().setReorderingAllowed(false);
     }
 
     public void Table_view() {

@@ -121,7 +121,7 @@ public class Add_a_Member extends javax.swing.JFrame {
                     firstnameField.getText(),
                     middlenameField.getText(),
                     lastnameField.getText(),
-                    sexComboBox.getSelectedItem().toString(),//comboBox
+                    sexComboBox.getSelectedItem().toString(),
                     contactnumberField.getText(),
                     occupationField.getText(),
                     addressField.getText(),
@@ -308,6 +308,11 @@ public class Add_a_Member extends javax.swing.JFrame {
         middlenameField.setBounds(230, 50, 170, 25);
 
         sexComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Male", "Female" }));
+        sexComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexComboBoxActionPerformed(evt);
+            }
+        });
         sexComboBox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 sexComboBoxKeyPressed(evt);
@@ -834,6 +839,10 @@ public class Add_a_Member extends javax.swing.JFrame {
     private void monthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_monthKeyPressed
         jLabel4.setVisible(false);
     }//GEN-LAST:event_monthKeyPressed
+
+    private void sexComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
