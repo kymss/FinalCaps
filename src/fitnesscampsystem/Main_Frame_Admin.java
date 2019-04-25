@@ -9,11 +9,13 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import panels.DASHBOARD;
@@ -21,7 +23,6 @@ import panels.Monthly_Reports;
 import panels.Members;
 import panels.ADD_USER;
 import panels.AttendanceMembers;
-
 
 public class Main_Frame_Admin extends javax.swing.JFrame {
 
@@ -54,8 +55,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         ShowDate();
         ShowTime();
         role.setVisible(false);
-
-
+        pass.setVisible(false);
+        pass.setVisible(false);
 
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension dim = new Dimension(tk.getScreenSize());
@@ -97,7 +98,6 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 //        c.gridx = 0;
 //        c.gridy = 0;
 //        DynamicPanel.add(p6, c);
-
         p1.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
@@ -129,6 +129,11 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 //        name.setText(uname + "!!");
 //
 //    }
+
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
 
     void ShowDate() {
         Date d = new Date();
@@ -175,6 +180,9 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         adduser3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        pass = new javax.swing.JPanel();
+        adduser1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         TOPBAR = new javax.swing.JPanel();
         name = new javax.swing.JLabel();
         welcome = new javax.swing.JLabel();
@@ -183,7 +191,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         DynamicPanel = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("fitnesscamp");
         setBackground(new java.awt.Color(0, 102, 102));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -428,7 +436,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         );
 
         SIDEBAR.add(MONTH_REPORT);
-        MONTH_REPORT.setBounds(0, 260, 250, 50);
+        MONTH_REPORT.setBounds(0, 310, 250, 50);
 
         LOGOUT.setBackground(new java.awt.Color(16, 22, 28));
         LOGOUT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -514,11 +522,54 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         );
 
         SIDEBAR.add(ATTENDANCE);
-        ATTENDANCE.setBounds(0, 310, 250, 50);
+        ATTENDANCE.setBounds(0, 260, 250, 50);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
         SIDEBAR.add(jLabel9);
         jLabel9.setBounds(0, -20, 250, 190);
+
+        pass.setBackground(new java.awt.Color(16, 22, 28));
+        pass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                passMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                passMouseExited(evt);
+            }
+        });
+
+        adduser1.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
+        adduser1.setForeground(new java.awt.Color(255, 255, 255));
+        adduser1.setText("CHANGE PASSWORD");
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/14.png"))); // NOI18N
+
+        javax.swing.GroupLayout passLayout = new javax.swing.GroupLayout(pass);
+        pass.setLayout(passLayout);
+        passLayout.setHorizontalGroup(
+            passLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, passLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(adduser1)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        passLayout.setVerticalGroup(
+            passLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(passLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(adduser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SIDEBAR.add(pass);
+        pass.setBounds(0, 570, 250, 50);
 
         getContentPane().add(SIDEBAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 24, 250, 770));
 
@@ -727,7 +778,11 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_MONTH_REPORTMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
+        int opt = JOptionPane.showConfirmDialog(null, "Are you sure to exit?", "Delete", JOptionPane.YES_NO_OPTION);
+        if (opt == 0) {
+            System.exit(0);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -739,7 +794,13 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
-        // TODO add your handling code here:
+
+            int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
+            if (opt == 0) {
+                close();
+                Log_in lo = new Log_in();
+                lo.setVisible(true);
+            }
     }//GEN-LAST:event_LOGOUTMouseClicked
 
     private void LOGOUTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseEntered
@@ -778,6 +839,18 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             ATTENDANCE.setBackground(new Color(16, 22, 28));
         }
     }//GEN-LAST:event_ATTENDANCEMouseExited
+
+    private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passMouseClicked
+
+    private void passMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passMouseEntered
+
+    private void passMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passMouseExited
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -823,12 +896,14 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JPanel TOPBAR;
     private javax.swing.JLabel adduser;
+    private javax.swing.JLabel adduser1;
     private javax.swing.JLabel adduser3;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -840,6 +915,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JLabel members;
     private javax.swing.JLabel monthly;
     public javax.swing.JLabel name;
+    public javax.swing.JPanel pass;
     public javax.swing.JLabel role;
     private javax.swing.JLabel time;
     private javax.swing.JLabel welcome;

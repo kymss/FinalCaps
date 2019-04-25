@@ -78,20 +78,18 @@ public class MRex extends javax.swing.JPanel {
                 "ID", "Name", "Last Name", "Start", " End"
             }
         ));
-        ExpiredSubs.setSelectionBackground(new java.awt.Color(255, 204, 0));
+        ExpiredSubs.setSelectionBackground(new java.awt.Color(51, 210, 102));
         jScrollPane1.setViewportView(ExpiredSubs);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

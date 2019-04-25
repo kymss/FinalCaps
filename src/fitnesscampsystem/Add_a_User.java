@@ -13,13 +13,14 @@ public class Add_a_User extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
-    private static Add_a_User instance = null;    
+
+    private static Add_a_User instance = null;
+
     public static Add_a_User getInstance() {
-      if(instance == null) {
-         instance = new Add_a_User();
-      }
-      return instance;
+        if (instance == null) {
+            instance = new Add_a_User();
+        }
+        return instance;
     }
 
     public Add_a_User() {
@@ -32,19 +33,19 @@ public class Add_a_User extends javax.swing.JFrame {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
-    
-    public boolean checkUsername(String username){
+
+    public boolean checkUsername(String username) {
         boolean checkUser = false;
-        
+
         String sql = "SELECT * FROM Login_Tbl WHERE username = ?";
-        
+
         try {
             pst = con.prepareStatement(sql);
             pst.setString(1, username);
             rs = pst.executeQuery();
-            
-            if(rs.next()){
-                    checkUser = true;
+
+            if (rs.next()) {
+                checkUser = true;
             }
         } catch (Exception e) {
         }
@@ -249,57 +250,43 @@ public class Add_a_User extends javax.swing.JFrame {
         String fname = RG_NAME.getText();
         String lastname = RG_LASTNAME.getText();
         String username = RG_USERNAME.getText();
-        String password = new String(RG_PASSWORD.getPassword());   
-        String confirmpassword = new String(RG_CONFIRMPASSWORD.getPassword()); 
+        String password = new String(RG_PASSWORD.getPassword());
+        String confirmpassword = new String(RG_CONFIRMPASSWORD.getPassword());
         String rl = jComboBox1.getSelectedItem().toString();
-      
+
+        if ((RG_NAME.getText().trim().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (RG_LASTNAME.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (RG_USERNAME.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (RG_PASSWORD.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (RG_CONFIRMPASSWORD.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (checkUsername(username)) {
+            JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
         
-        if((RG_NAME.getText().trim().isEmpty())){
-                          JOptionPane.showMessageDialog(null,"Fill out the important information","Error", JOptionPane.ERROR_MESSAGE);
-                      }
-                 else if(RG_LASTNAME.getText().trim().isEmpty()){
-                          JOptionPane.showMessageDialog(null,"Fill out the important information","Error", JOptionPane.ERROR_MESSAGE);
-                      }
-                 else if(RG_USERNAME.getText().trim().isEmpty()){
-                          JOptionPane.showMessageDialog(null,"Fill out the important information","Error", JOptionPane.ERROR_MESSAGE);
-                      }
-                 else if(RG_PASSWORD.getText().trim().isEmpty()){
-                          JOptionPane.showMessageDialog(null,"Fill out the important information","Error", JOptionPane.ERROR_MESSAGE);
-                      }
-                 else if(RG_CONFIRMPASSWORD.getText().trim().isEmpty()){
-                          JOptionPane.showMessageDialog(null,"Fill out the important information","Error", JOptionPane.ERROR_MESSAGE);
-                      }
-                 else if(checkUsername(username)){
-                    JOptionPane.showMessageDialog(null,"Username already exists","Error", JOptionPane.ERROR_MESSAGE);
-                }
-        
-           String query = "INSERT into Login_Tbl( username, firstname, lastname, password, confirm_password, role) values (?,?,?,?,?,?)";
-        try{
-//                pst=con.prepareStatement("INSERT into Login_Tbl(name, lastname, username, password, confirm_password, options) values (?,?,?,?,?,?)");
-                pst = con.prepareStatement(query);
-                pst.setString(1, RG_USERNAME.getText());
-                pst.setString(2, RG_LASTNAME.getText());
-                pst.setString(3, RG_NAME.getText());
-                pst.setString(4, password);
-                pst.setString(5, confirmpassword);
-                pst.setString(6, rl);
-                
-                if(password.equals(confirmpassword)){
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(this,"User Successfully Registered", "success",JOptionPane.INFORMATION_MESSAGE);
+         
+
+        Database db = Database.getInstance();
+        db.add_a_user(
+                RG_USERNAME.getText(),
+                RG_NAME.getText(),
+                RG_LASTNAME.getText(),
+                RG_PASSWORD.getText().toString(),
+                RG_CONFIRMPASSWORD.getText().toString(),
+                jComboBox1.getSelectedItem().toString()       
+        );
+//
+        if (password.equals(confirmpassword)) {
+            JOptionPane.showMessageDialog(this, "User Successfully Registered", "success", JOptionPane.INFORMATION_MESSAGE);
 //                    this.dispose();
-                }else {
-                    JOptionPane.showMessageDialog(this,"Username & Password did not matched!","User not registered",JOptionPane.ERROR_MESSAGE);
-                }
-//                RG_NAME.setText(null);  
-//                RG_LASTNAME.setText(null);
-//                RG_USERNAME.setText(null);
-//                RG_PASSWORD.setText(null);
-//                RG_CONFIRMPASSWORD.setText(null);
-                
-            }catch(Exception e){
-                e.printStackTrace();         
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Username & Password did not matched!", "User not registered", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_SAVE1ActionPerformed
 
     /**

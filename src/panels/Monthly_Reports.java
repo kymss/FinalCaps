@@ -164,6 +164,9 @@ public class Monthly_Reports extends javax.swing.JPanel {
         EXPIREDSUBSCRIPTIONS = new javax.swing.JButton();
         INCOME = new javax.swing.JButton();
         Dpanel = new javax.swing.JPanel();
+        lbl_sbs = new javax.swing.JLabel();
+        lbl_xp = new javax.swing.JLabel();
+        lbl_inc = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -177,6 +180,11 @@ public class Monthly_Reports extends javax.swing.JPanel {
         SUBSCRIPTIONS.setContentAreaFilled(false);
         SUBSCRIPTIONS.setOpaque(true);
         SUBSCRIPTIONS.setPreferredSize(new java.awt.Dimension(147, 25));
+        SUBSCRIPTIONS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SUBSCRIPTIONSMouseExited(evt);
+            }
+        });
         SUBSCRIPTIONS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SUBSCRIPTIONSActionPerformed(evt);
@@ -214,35 +222,49 @@ public class Monthly_Reports extends javax.swing.JPanel {
         Dpanel.setLayout(DpanelLayout);
         DpanelLayout.setHorizontalGroup(
             DpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 818, Short.MAX_VALUE)
+            .addGap(0, 970, Short.MAX_VALUE)
         );
         DpanelLayout.setVerticalGroup(
             DpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 446, Short.MAX_VALUE)
         );
+
+        lbl_sbs.setBackground(new java.awt.Color(48, 173, 95));
+        lbl_sbs.setOpaque(true);
+
+        lbl_xp.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_xp.setOpaque(true);
+
+        lbl_inc.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_inc.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1018, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Dpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lbl_sbs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SUBSCRIPTIONS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Dpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(SUBSCRIPTIONS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(EXPIREDSUBSCRIPTIONS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(INCOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                            .addComponent(EXPIREDSUBSCRIPTIONS)
+                            .addComponent(lbl_xp, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(INCOME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_inc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,9 +278,14 @@ public class Monthly_Reports extends javax.swing.JPanel {
                     .addComponent(SUBSCRIPTIONS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EXPIREDSUBSCRIPTIONS)
                     .addComponent(INCOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_inc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_sbs, javax.swing.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE)
+                    .addComponent(lbl_xp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(Dpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         Dpanel.getAccessibleContext().setAccessibleName("");
@@ -269,19 +296,48 @@ public class Monthly_Reports extends javax.swing.JPanel {
         p1.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
+        
+        
+        if (p1.isVisible()) {
+            lbl_sbs.setBackground(new Color(48,173,95));
+            lbl_xp.setBackground(new Color(255,255, 255));
+            lbl_inc.setBackground(new Color(255,255, 255));
+        } else {
+            lbl_sbs.setBackground(new Color(48,173,95));
+        }
     }//GEN-LAST:event_SUBSCRIPTIONSActionPerformed
 
     private void EXPIREDSUBSCRIPTIONSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EXPIREDSUBSCRIPTIONSActionPerformed
         p1.setVisible(false);
         p2.setVisible(true);
         p3.setVisible(false);
+        
+        if (p2.isVisible()) {
+            lbl_sbs.setBackground(new Color(255,255, 255));
+            lbl_xp.setBackground(new Color(48,173,95));
+            lbl_inc.setBackground(new Color(255,255, 255));
+        } else {
+            lbl_xp.setBackground(new Color(48,173,95));
+        }
     }//GEN-LAST:event_EXPIREDSUBSCRIPTIONSActionPerformed
 
     private void INCOMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INCOMEActionPerformed
         p1.setVisible(false);
         p2.setVisible(false);
         p3.setVisible(true);
+        
+        if (p3.isVisible()) {
+            lbl_sbs.setBackground(new Color(255,255, 255));
+            lbl_xp.setBackground(new Color(255,255, 255));
+            lbl_inc.setBackground(new Color(48,173,95));
+        } else {
+            lbl_inc.setBackground(new Color(48,173,95));
+        }
     }//GEN-LAST:event_INCOMEActionPerformed
+
+    private void SUBSCRIPTIONSMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SUBSCRIPTIONSMouseExited
+        
+    }//GEN-LAST:event_SUBSCRIPTIONSMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -291,5 +347,8 @@ public class Monthly_Reports extends javax.swing.JPanel {
     private javax.swing.JButton SUBSCRIPTIONS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl_inc;
+    private javax.swing.JLabel lbl_sbs;
+    private javax.swing.JLabel lbl_xp;
     // End of variables declaration//GEN-END:variables
 }

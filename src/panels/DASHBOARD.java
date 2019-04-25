@@ -99,7 +99,7 @@ public class DASHBOARD extends javax.swing.JPanel {
 
     private void all_expired() {
         try {
-            Object[] columns = {"ID", "Firstname", "Lastname", "Gender", "ContactNumber",  "Membership", "Start", "End"};
+            Object[] columns = {"ID", "Firstname", "Lastname", "Gender", "ContactNumber", "Membership", "Start", "End"};
             MODEL = new DefaultTableModel();
             MODEL.setColumnIdentifiers(columns);
             allexpired_tbl.setModel(MODEL);
@@ -122,7 +122,6 @@ public class DASHBOARD extends javax.swing.JPanel {
             c = Calendar.getInstance(); // reset
             String today = dateFormat.format(c.getTime());
             String sql = "SELECT members_id, mfirstName, mlastName,  gender, ContactNumber, Membership, Start, End FROM Members_Tbl WHERE End <=  '" + today + "'";
-//            members_id, mfirstName, mlastName,  gender, ContactNumber, Membership, Start, End
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             allexpired_tbl.setModel(DbUtils.resultSetToTableModel(rs));
@@ -142,7 +141,7 @@ public class DASHBOARD extends javax.swing.JPanel {
         PANE = new javax.swing.JScrollPane();
         allexpired_tbl = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        DELETEBTN = new javax.swing.JButton();
         ID = new javax.swing.JTextField();
         START = new javax.swing.JTextField();
         END = new javax.swing.JTextField();
@@ -200,15 +199,15 @@ public class DASHBOARD extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel2.setText("Expired Memberships");
 
-        jButton4.setBackground(new java.awt.Color(227, 23, 13));
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("DELETE");
-        jButton4.setContentAreaFilled(false);
-        jButton4.setOpaque(true);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        DELETEBTN.setBackground(new java.awt.Color(227, 23, 13));
+        DELETEBTN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DELETEBTN.setForeground(new java.awt.Color(255, 255, 255));
+        DELETEBTN.setText("DELETE");
+        DELETEBTN.setContentAreaFilled(false);
+        DELETEBTN.setOpaque(true);
+        DELETEBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                DELETEBTNActionPerformed(evt);
             }
         });
 
@@ -249,7 +248,7 @@ public class DASHBOARD extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(RENEW)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4))
+                                .addComponent(DELETEBTN))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
                                 .addComponent(PANE, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -275,7 +274,7 @@ public class DASHBOARD extends javax.swing.JPanel {
                         .addComponent(START, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(END, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4)
+                        .addComponent(DELETEBTN)
                         .addComponent(RENEW)))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
@@ -290,25 +289,20 @@ public class DASHBOARD extends javax.swing.JPanel {
         renewal();
     }//GEN-LAST:event_allexpired_tblMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-        int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
-        if (opt == 0) {
-            String sql = "DELETE FROM Members_Tbl WHERE members_id = ? ";
-
-            try {
-                pst = con.prepareStatement(sql);
-                pst.setString(1, ID.getText());
-                pst.execute();
-                //                JOptionPane.showMessageDialog(null,"Deleted")
-                pst.close();
-                rs.close();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+    private void DELETEBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELETEBTNActionPerformed
+        int row = allexpired_tbl.getSelectedRow();
+        if (row >= 0) {
+            int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
+            if (opt == 0) {
+                String id = allexpired_tbl.getModel().getValueAt(row, 0).toString();
+                Database db = Database.getInstance();
+                db.deleteMember(id);
+                all_expired();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Member first!");
         }
-        all_expired();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_DELETEBTNActionPerformed
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
         final TableRowSorter rowSorter = new TableRowSorter<>(allexpired_tbl.getModel());
@@ -340,13 +334,13 @@ public class DASHBOARD extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DELETEBTN;
     private javax.swing.JTextField END;
     private javax.swing.JTextField ID;
     private javax.swing.JScrollPane PANE;
     private javax.swing.JButton RENEW;
     private javax.swing.JTextField START;
     private javax.swing.JTable allexpired_tbl;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;

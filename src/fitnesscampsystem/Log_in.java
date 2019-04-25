@@ -256,7 +256,8 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGIN1MouseExited
 
     private void LOGIN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGIN1ActionPerformed
-           this.dispose();
+//           this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_LOGIN1ActionPerformed
 
     public static void main(String args[]) {

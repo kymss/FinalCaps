@@ -32,6 +32,8 @@ public class Update_Member extends javax.swing.JFrame {
     public Update_Member() {
         initComponents();
         con = Database.ConnectDB();
+        aydi.setVisible(false);
+        
     }
     
      public void close() {
@@ -435,9 +437,9 @@ public class Update_Member extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Enthusiast's Profile");
+        jLabel2.setText("Edit Enthusiast's Profile");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(230, 10, 130, 30);
+        jLabel2.setBounds(230, 10, 160, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

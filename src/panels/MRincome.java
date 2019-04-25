@@ -25,18 +25,18 @@ public class MRincome extends javax.swing.JPanel {
 
     public MRincome() {
         initComponents();
-        
+
         con = Database.ConnectDB();
-           Table_view();
-           payment();
+        Table_view();
+        payment();
         income.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         income.getTableHeader().setOpaque(false);
         income.getTableHeader().setBackground(new Color(48, 173, 95));
         income.getTableHeader().setForeground(new Color(255, 255, 255));
         income.setRowHeight(25);
     }
-    
-     public void Table_view() {
+
+    public void Table_view() {
         try {
 //             select * from table where strftime('%m', created_date) == strftime('%m','now')
             String sql = "SELECT members_id, mfirstName, mlastName, Payment from Members_Tbl WHERE  strftime('%m', Start) == strftime('%m', 'now')";
@@ -52,28 +52,33 @@ public class MRincome extends javax.swing.JPanel {
             System.out.print(e);
         }
     }
-     
-     public void payment(){
-         try {
-             String sql = "SELECT SUM(Payment) FROM Members_Tbl";
-             pst = con.prepareStatement(sql);
-             rs = pst.executeQuery();
-             
-              if (rs.next()) {
+//
+//    public void getSum() {
+//        int sum = 0;
+//        for (int i = 0; i < income.getRowCount(); i++) {
+//            sum = sum + Integer.parseInt(table.getValueAt(i, 3).toString);
+//
+//        }
+//        field.setText(Integer.toString(num));
+//    }
+
+    public void payment() {
+        try {
+            String sql = "SELECT SUM(Payment) FROM Members_Tbl";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
                 String sum = rs.getString("SUM(Payment)");
 //                num_label.setText(sum);
-                 jTextField1.setText(sum);
-
+                jTextField1.setText(sum);
             }
-            
-             
-             pst.close();
-             rs.close();
-         } catch (Exception e) {
-             System.out.println(e);
-         }
-     }
-
+            pst.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,8 +106,14 @@ public class MRincome extends javax.swing.JPanel {
                 "ID", "Name", "Last Name", "Start", " End"
             }
         ));
-        income.setSelectionBackground(new java.awt.Color(255, 204, 0));
+        income.setSelectionBackground(new java.awt.Color(51, 210, 102));
         jScrollPane1.setViewportView(income);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Total income");
 
@@ -110,22 +121,29 @@ public class MRincome extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)))
+                    .addComponent(jLabel1))
+                .addGap(5, 5, 5))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
