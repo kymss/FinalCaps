@@ -55,9 +55,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         con = Database.ConnectDB();
         ShowDate();
         ShowTime();
-        role.setVisible(false);
-        pass.setVisible(false);
-        pass.setVisible(false);
+//        id.setVisible(false);
 
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension dim = new Dimension(tk.getScreenSize());
@@ -118,7 +116,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 //        role.getText();
 //        String user = "User";
 
-        if (role.getText().equals("Admin")) {
+        if (display_id.getText().equals("Admin")) {
             ADD_USER.setVisible(true);
         } else {
             ADD_USER.setVisible(false);
@@ -185,7 +183,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         TOPBAR = new javax.swing.JPanel();
         name = new javax.swing.JLabel();
         welcome = new javax.swing.JLabel();
-        role = new javax.swing.JLabel();
+        display_id = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         DynamicPanel = new javax.swing.JPanel();
@@ -626,8 +624,8 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         welcome.setForeground(new java.awt.Color(255, 255, 255));
         welcome.setText("Welcome");
 
-        role.setForeground(new java.awt.Color(255, 255, 255));
-        role.setText("jLabel2");
+        display_id.setForeground(new java.awt.Color(255, 255, 255));
+        display_id.setText("jLabel2");
 
         date.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 24)); // NOI18N
         date.setForeground(new java.awt.Color(255, 255, 255));
@@ -647,7 +645,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name)
                 .addGap(34, 34, 34)
-                .addComponent(role)
+                .addComponent(display_id)
                 .addGap(0, 871, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TOPBARLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -663,7 +661,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcome)
                     .addComponent(name)
-                    .addComponent(role))
+                    .addComponent(display_id))
                 .addContainerGap())
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
@@ -884,7 +882,9 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_ATTENDANCEMouseExited
 
     private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked
-
+        changepass cp = changepass.getInstance();
+        cp.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_passMouseClicked
 
     private void passMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseEntered
@@ -973,6 +973,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JLabel as;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel date;
+    public javax.swing.JLabel display_id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -990,7 +991,6 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JLabel monthly;
     public javax.swing.JLabel name;
     public javax.swing.JPanel pass;
-    public javax.swing.JLabel role;
     private javax.swing.JLabel time;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables

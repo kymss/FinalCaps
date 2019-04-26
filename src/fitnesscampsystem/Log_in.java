@@ -14,13 +14,16 @@ import javax.swing.JOptionPane;
 public class Log_in extends javax.swing.JFrame {
 
     Main_Frame_Admin mfa = Main_Frame_Admin.getInstance();
-
+    
+    
     public Log_in() {
         initComponents();
 
         ROLE.setVisible(false);
     }
 
+        
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -215,8 +218,27 @@ public class Log_in extends javax.swing.JFrame {
                     mfa.setVisible(true);
                     mfa.pack();
                     mfa.name.setText(uname);
+                    String mid = rs.getString("user_id");
+                    mfa.display_id.setText(mid);
 //                    String r = rs.getString("options");
 //                    y.role.setText(r);
+
+                    changepass cp = changepass.getInstance();
+                    String cid = rs.getString("user_id");
+                    cp.cp_id.setText(cid);
+//                    String un = rs.getString("username");
+//                    cp.usname.setText(un);
+//                    String fn = rs.getString("firstname");
+//                    cp.fsname.setText(fn);
+//                    String ln = rs.getString("lastname");
+//                    cp.lsname.setText(ln);
+//                    String pws = rs.getString("password");
+//                    cp.pw.setText(pws);
+//                    String cpws = rs.getString("confirm_password");
+//                    cp.confirmpw.setText(cpws);
+//                    String rol = rs.getString("role");
+//                    cp.rl.setText(rol);
+                    
                     mfa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     this.dispose();
                     setVisible(false);
@@ -248,11 +270,11 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGINMouseEntered
 
     private void LOGIN1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGIN1MouseEntered
-         LOGIN1.setBackground(new Color(0, 238, 0));
+        LOGIN1.setBackground(new Color(0, 238, 0));
     }//GEN-LAST:event_LOGIN1MouseEntered
 
     private void LOGIN1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGIN1MouseExited
-         LOGIN1.setBackground(new Color(102, 102, 102));
+        LOGIN1.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_LOGIN1MouseExited
 
     private void LOGIN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGIN1ActionPerformed

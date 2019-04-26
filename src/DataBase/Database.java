@@ -1,5 +1,6 @@
 package DataBase;
 
+import fitnesscampsystem.Add_a_User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -127,6 +128,10 @@ public class Database {
             pst.setString(6, role);
             pst.executeUpdate();
             System.out.println(" pire");
+            
+            Add_a_User aau = Add_a_User.getInstance();
+            aau.clear_ops();
+            
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(" new user not added");
@@ -243,6 +248,35 @@ public class Database {
             System.out.print("NOOOO");
         }
     }
+    
+    
+    public void changePassword(String uname, String fname, String lname, String password, String conpassword, String role, String id) {
+
+        String sql = "UPDATE Login_Tbl SET username = ? , firstname = ?, lastname = ?, password = ?, confirm_password = ?, role = ? WHERE user_id = ?";
+
+        try {
+            con = Database.ConnectDB();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            // set the corresponding param
+
+            pstmt.setString(1, uname);
+            pstmt.setString(2, fname);
+            pstmt.setString(3, lname);
+            pstmt.setString(4, password);
+            pstmt.setString(5, conpassword);
+            pstmt.setString(6, role);
+            pstmt.setString(7, id);
+            
+            // update
+            pstmt.executeUpdate();
+          JOptionPane.showMessageDialog(null, "" + uname + " Successfully change password");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.print("NOOOO");
+        }
+    }
+    
+    
 
     static String userPassword = null;
 

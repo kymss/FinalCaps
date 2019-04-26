@@ -51,6 +51,16 @@ public class Add_a_User extends javax.swing.JFrame {
         }
         return checkUser;
     }
+    
+    public void clear_ops() {
+                    RG_NAME.setText("");
+                    RG_LASTNAME.setText("");
+                    RG_USERNAME.setText("");
+                    RG_PASSWORD.setText("");
+                    RG_CONFIRMPASSWORD.setText("");
+                    jComboBox1.setSelectedIndex(0);;
+                    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -279,6 +289,7 @@ public class Add_a_User extends javax.swing.JFrame {
                 RG_CONFIRMPASSWORD.getText().toString(),
                 jComboBox1.getSelectedItem().toString()       
         );
+        clear_ops();
 //
         if (password.equals(confirmpassword)) {
             JOptionPane.showMessageDialog(this, "User Successfully Registered", "success", JOptionPane.INFORMATION_MESSAGE);
