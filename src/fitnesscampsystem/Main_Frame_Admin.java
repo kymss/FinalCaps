@@ -1,5 +1,6 @@
 package fitnesscampsystem;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -51,8 +52,9 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
     public Main_Frame_Admin() {
         initComponents();
-
+        
         con = Database.ConnectDB();
+        log();
         ShowDate();
         ShowTime();
 //        id.setVisible(false);
@@ -111,12 +113,21 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
             DASHBOARD_BTN.setBackground(new Color(16, 22, 28));
         }
     }
+    
+    
+    public void log(){
+        if(this.isVisible()){
+//            DataBaseLogs dbl = DataBaseLogs.getInstance();
+//            dbl.userLoggedIn();
+        }
+    }
+   
 
     public void exclusive() {
 //        role.getText();
 //        String user = "User";
 
-        if (display_id.getText().equals("Admin")) {
+        if (USER_ID.getText().equals("Admin")) {
             ADD_USER.setVisible(true);
         } else {
             ADD_USER.setVisible(false);
@@ -181,11 +192,13 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         as = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         TOPBAR = new javax.swing.JPanel();
-        name = new javax.swing.JLabel();
+        skl = new javax.swing.JLabel();
         welcome = new javax.swing.JLabel();
-        display_id = new javax.swing.JLabel();
+        USER_ID = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
+        USERNAME = new javax.swing.JLabel();
+        log_description = new javax.swing.JLabel();
         DynamicPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -616,16 +629,16 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
         TOPBAR.setBackground(new java.awt.Color(16, 22, 28));
 
-        name.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        name.setForeground(new java.awt.Color(255, 255, 255));
-        name.setText("jLabel3");
+        skl.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        skl.setForeground(new java.awt.Color(255, 255, 255));
+        skl.setText("jLabel3");
 
         welcome.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         welcome.setForeground(new java.awt.Color(255, 255, 255));
         welcome.setText("Welcome");
 
-        display_id.setForeground(new java.awt.Color(255, 255, 255));
-        display_id.setText("jLabel2");
+        USER_ID.setForeground(new java.awt.Color(255, 255, 255));
+        USER_ID.setText("userid");
 
         date.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 24)); // NOI18N
         date.setForeground(new java.awt.Color(255, 255, 255));
@@ -635,6 +648,12 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         time.setForeground(new java.awt.Color(255, 255, 255));
         time.setText("jLabel2");
 
+        USERNAME.setForeground(new java.awt.Color(255, 255, 255));
+        USERNAME.setText("username");
+
+        log_description.setForeground(new java.awt.Color(255, 255, 255));
+        log_description.setText("Logged in");
+
         javax.swing.GroupLayout TOPBARLayout = new javax.swing.GroupLayout(TOPBAR);
         TOPBAR.setLayout(TOPBARLayout);
         TOPBARLayout.setHorizontalGroup(
@@ -643,12 +662,16 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(welcome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(name)
-                .addGap(34, 34, 34)
-                .addComponent(display_id)
-                .addGap(0, 871, Short.MAX_VALUE))
+                .addComponent(skl)
+                .addGap(200, 200, 200)
+                .addComponent(log_description)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TOPBARLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(356, 356, 356)
+                .addComponent(USER_ID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(USERNAME)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 460, Short.MAX_VALUE)
                 .addComponent(date)
                 .addGap(18, 18, 18)
                 .addComponent(time)
@@ -657,11 +680,19 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
         TOPBARLayout.setVerticalGroup(
             TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TOPBARLayout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(welcome)
-                    .addComponent(name)
-                    .addComponent(display_id))
+                    .addComponent(USER_ID)
+                    .addComponent(USERNAME))
+                .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TOPBARLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(TOPBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(welcome)
+                            .addComponent(skl)))
+                    .addGroup(TOPBARLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(log_description)))
                 .addContainerGap())
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
@@ -836,7 +867,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
 
-        int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
+        int opt = JOptionPane.showConfirmDialog(null, "Are you sure to log out?", "Delete", JOptionPane.YES_NO_OPTION);
         if (opt == 0) {
             close();
             Log_in lo = new Log_in();
@@ -966,14 +997,15 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JPanel REGISTER_BTN;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JPanel TOPBAR;
+    public javax.swing.JLabel USERNAME;
+    public javax.swing.JLabel USER_ID;
     private javax.swing.JPanel WALK_IN;
     private javax.swing.JLabel adduser;
     private javax.swing.JLabel adduser1;
     private javax.swing.JLabel adduser3;
     private javax.swing.JLabel as;
     private javax.swing.JLabel dashboard;
-    private javax.swing.JLabel date;
-    public javax.swing.JLabel display_id;
+    public javax.swing.JLabel date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -987,11 +1019,12 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel log_description;
     private javax.swing.JLabel members;
     private javax.swing.JLabel monthly;
-    public javax.swing.JLabel name;
     public javax.swing.JPanel pass;
-    private javax.swing.JLabel time;
+    public javax.swing.JLabel skl;
+    public javax.swing.JLabel time;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }

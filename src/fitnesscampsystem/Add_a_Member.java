@@ -1,5 +1,6 @@
 package fitnesscampsystem;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -98,7 +99,8 @@ public class Add_a_Member extends javax.swing.JFrame {
             jLabel25.setVisible(true);
             jLabel4.setVisible(true);
 
-        }  if ((firstnameField.getText().trim().isEmpty())) {
+        }
+        if ((firstnameField.getText().trim().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Fill out the important information", "Error", JOptionPane.ERROR_MESSAGE);
             lblfname.setVisible(true);
         } else if (lastnameField.getText().trim().isEmpty()) {
@@ -140,10 +142,11 @@ public class Add_a_Member extends javax.swing.JFrame {
                     yu.getText()
             );
             clear_ops();
+            DataBaseLogs dbl = DataBaseLogs.getInstance();
+            dbl.addMemberLog();
         }
     }
 
-   
     public void pay() {
 //        payment p = new payment();
 //        p.setVisible(true);
@@ -171,31 +174,30 @@ public class Add_a_Member extends javax.swing.JFrame {
 //            }
         }
     }
-    
-    
-    
+
     public void clear_ops() {
-                    firstnameField.setText("");
-                    middlenameField.setText("");
-                    lastnameField.setText("");
-                    sexComboBox.setSelectedIndex(0);;
-                    contactnumberField.setText("");
-                    occupationField.setText("");
-                    addressField.setText("");
-                    hobbiesField.setText("");
-                    //EmeergencyInformation
-                    contactpersonField.setText("");
-                    contactPersonNumberField.setText("");
-                    relationshipField.setText("");
-                    healthconcernField.setText("");
-                    currentweightField.setText("");
-                    targetweightField.setText("");
-                    month.setSelectedIndex(0);
+        firstnameField.setText("");
+        middlenameField.setText("");
+        lastnameField.setText("");
+        sexComboBox.setSelectedIndex(0);;
+        contactnumberField.setText("");
+        occupationField.setText("");
+        addressField.setText("");
+        hobbiesField.setText("");
+        //EmeergencyInformation
+        contactpersonField.setText("");
+        contactPersonNumberField.setText("");
+        relationshipField.setText("");
+        healthconcernField.setText("");
+        currentweightField.setText("");
+        targetweightField.setText("");
+        month.setSelectedIndex(0);
 //                    ((JTextField) start.getDateEditor().getUiComponent()).getText();
-                    end.setText("");
+        end.setText("");
 //                    ((JTextField) created_at.getDateEditor().getUiComponent()).getText();
-                    yu.setText("");
+        yu.setText("");
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -256,6 +258,7 @@ public class Add_a_Member extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         comn = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        description = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -299,11 +302,6 @@ public class Add_a_Member extends javax.swing.JFrame {
         middlenameField.setForeground(new java.awt.Color(46, 46, 46));
         middlenameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         middlenameField.setPreferredSize(new java.awt.Dimension(8, 20));
-        middlenameField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                middlenameFieldMouseClicked(evt);
-            }
-        });
         jPanel1.add(middlenameField);
         middlenameField.setBounds(230, 50, 170, 25);
 
@@ -680,6 +678,10 @@ public class Add_a_Member extends javax.swing.JFrame {
         jPanel1.add(jLabel25);
         jLabel25.setBounds(30, 340, 10, 20);
 
+        description.setText("Registered a new Member");
+        jPanel1.add(description);
+        description.setBounds(300, 640, 130, 14);
+
         jPanel2.setBackground(new java.awt.Color(48, 173, 95));
         jPanel2.setLayout(null);
 
@@ -712,10 +714,6 @@ public class Add_a_Member extends javax.swing.JFrame {
     private void addressFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addressFieldMouseClicked
 
     }//GEN-LAST:event_addressFieldMouseClicked
-
-    private void middlenameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_middlenameFieldMouseClicked
-
-    }//GEN-LAST:event_middlenameFieldMouseClicked
 
     private void contactnumberFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactnumberFieldMouseClicked
 
@@ -781,6 +779,7 @@ public class Add_a_Member extends javax.swing.JFrame {
 //        payment i = new payment();
 //        i.setVisible(true);  
         Save();
+        
 
 
     }//GEN-LAST:event_SAVEmemActionPerformed
@@ -895,6 +894,7 @@ public class Add_a_Member extends javax.swing.JFrame {
     public javax.swing.JTextField contactpersonField;
     private com.toedter.calendar.JDateChooser created_at;
     public javax.swing.JTextField currentweightField;
+    public javax.swing.JLabel description;
     public javax.swing.JTextField end;
     public javax.swing.JTextField firstnameField;
     public javax.swing.JTextField healthconcernField;

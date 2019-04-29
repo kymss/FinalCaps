@@ -128,10 +128,13 @@ public class Database {
             pst.setString(6, role);
             pst.executeUpdate();
             System.out.println(" pire");
-            
+
             Add_a_User aau = Add_a_User.getInstance();
             aau.clear_ops();
             
+            DataBaseLogs dbl = DataBaseLogs.getInstance();
+            dbl.addUserLogs();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(" new user not added");
@@ -239,7 +242,7 @@ public class Database {
             pstmt.setString(5, gender);
             pstmt.setString(6, health);
             pstmt.setString(7, id);
-            
+
             // update
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "" + first + " successfuly updated");
@@ -248,8 +251,7 @@ public class Database {
             System.out.print("NOOOO");
         }
     }
-    
-    
+
     public void changePassword(String uname, String fname, String lname, String password, String conpassword, String role, String id) {
 
         String sql = "UPDATE Login_Tbl SET username = ? , firstname = ?, lastname = ?, password = ?, confirm_password = ?, role = ? WHERE user_id = ?";
@@ -266,17 +268,15 @@ public class Database {
             pstmt.setString(5, conpassword);
             pstmt.setString(6, role);
             pstmt.setString(7, id);
-            
+
             // update
             pstmt.executeUpdate();
-          JOptionPane.showMessageDialog(null, "" + uname + " Successfully change password");
+            JOptionPane.showMessageDialog(null, "" + uname + " Successfully change password");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.print("NOOOO");
         }
     }
-    
-    
 
     static String userPassword = null;
 

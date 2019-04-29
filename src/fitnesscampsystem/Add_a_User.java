@@ -1,5 +1,6 @@
 package fitnesscampsystem;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -89,6 +90,7 @@ public class Add_a_User extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         SAVE1 = new javax.swing.JButton();
+        descriptionuser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -213,6 +215,10 @@ public class Add_a_User extends javax.swing.JFrame {
         jPanel2.add(SAVE1);
         SAVE1.setBounds(190, 450, 170, 29);
 
+        descriptionuser.setText("Added a User");
+        jPanel2.add(descriptionuser);
+        descriptionuser.setBounds(210, 550, 120, 14);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -290,6 +296,8 @@ public class Add_a_User extends javax.swing.JFrame {
                 jComboBox1.getSelectedItem().toString()       
         );
         clear_ops();
+        DataBaseLogs dbl = DataBaseLogs.getInstance();
+        dbl.addUserLogs();
 //
         if (password.equals(confirmpassword)) {
             JOptionPane.showMessageDialog(this, "User Successfully Registered", "success", JOptionPane.INFORMATION_MESSAGE);
@@ -343,6 +351,7 @@ public class Add_a_User extends javax.swing.JFrame {
     private javax.swing.JPasswordField RG_PASSWORD;
     private javax.swing.JTextField RG_USERNAME;
     private javax.swing.JButton SAVE1;
+    public javax.swing.JLabel descriptionuser;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

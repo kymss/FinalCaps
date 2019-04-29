@@ -1,5 +1,6 @@
 package fitnesscampsystem;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import java.awt.Color;
 import java.sql.Connection;
@@ -14,16 +15,13 @@ import javax.swing.JOptionPane;
 public class Log_in extends javax.swing.JFrame {
 
     Main_Frame_Admin mfa = Main_Frame_Admin.getInstance();
-    
-    
+
     public Log_in() {
         initComponents();
 
         ROLE.setVisible(false);
     }
 
-        
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -79,10 +77,24 @@ public class Log_in extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LOGINMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LOGINMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                LOGINMouseReleased(evt);
+            }
         });
         LOGIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LOGINActionPerformed(evt);
+            }
+        });
+        LOGIN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LOGINKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                LOGINKeyReleased(evt);
             }
         });
 
@@ -217,32 +229,26 @@ public class Log_in extends javax.swing.JFrame {
                     ROLE.setText(r);
                     mfa.setVisible(true);
                     mfa.pack();
-                    mfa.name.setText(uname);
+                    mfa.skl.setText(uname);
                     String mid = rs.getString("user_id");
-                    mfa.display_id.setText(mid);
+                    mfa.USER_ID.setText(mid);
+                    String username = rs.getString("username");
+                    mfa.USERNAME.setText(username);
+
+//                    DataBaseLogs dbl = DataBaseLogs.getInstance();
+//                    dbl.userLoggedIn();
 //                    String r = rs.getString("options");
 //                    y.role.setText(r);
 
                     changepass cp = changepass.getInstance();
                     String cid = rs.getString("user_id");
                     cp.cp_id.setText(cid);
-//                    String un = rs.getString("username");
-//                    cp.usname.setText(un);
-//                    String fn = rs.getString("firstname");
-//                    cp.fsname.setText(fn);
-//                    String ln = rs.getString("lastname");
-//                    cp.lsname.setText(ln);
-//                    String pws = rs.getString("password");
-//                    cp.pw.setText(pws);
-//                    String cpws = rs.getString("confirm_password");
-//                    cp.confirmpw.setText(cpws);
-//                    String rol = rs.getString("role");
-//                    cp.rl.setText(rol);
-                    
+
                     mfa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     this.dispose();
                     setVisible(false);
-
+//                    DataBaseLogs dbl = DataBaseLogs.getInstance();
+//                    dbl.userLoggedIn();
                     if (ROLE.getText().equals("Admin")) {
                         mfa.ADD_USER.setVisible(true);
                     } else if (ROLE.getText().equals("User")) {
@@ -251,6 +257,7 @@ public class Log_in extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username and Password", "Login error", 1);
                 }
+
                 ps.close();
                 rs.close();
             } catch (SQLException ex) {
@@ -278,9 +285,24 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGIN1MouseExited
 
     private void LOGIN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGIN1ActionPerformed
-//           this.dispose();
         System.exit(0);
     }//GEN-LAST:event_LOGIN1ActionPerformed
+
+    private void LOGINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LOGINKeyPressed
+        
+    }//GEN-LAST:event_LOGINKeyPressed
+
+    private void LOGINKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LOGINKeyReleased
+       
+    }//GEN-LAST:event_LOGINKeyReleased
+
+    private void LOGINMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGINMousePressed
+         LOGIN.setBackground(new Color(0, 205, 0));
+    }//GEN-LAST:event_LOGINMousePressed
+
+    private void LOGINMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGINMouseReleased
+        LOGIN.setBackground(new Color(0, 238, 0));
+    }//GEN-LAST:event_LOGINMouseReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -1,8 +1,10 @@
 package panels;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import fitnesscampsystem.Add_a_User;
 import fitnesscampsystem.Main_Frame_Admin;
+import fitnesscampsystem.userLogs;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -18,6 +20,17 @@ public class ADD_USER extends javax.swing.JPanel {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    
+    private static ADD_USER instance = null;
+
+    public static ADD_USER getInstance() {
+        if (instance == null) {
+            instance = new ADD_USER();
+        }
+        return instance;
+    }
+    
 
     public ADD_USER() {
         initComponents();
@@ -77,6 +90,9 @@ public class ADD_USER extends javax.swing.JPanel {
         lname = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         role = new javax.swing.JComboBox<>();
+        LOGS = new javax.swing.JButton();
+        updateuser = new javax.swing.JLabel();
+        deleteuser = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -175,6 +191,22 @@ public class ADD_USER extends javax.swing.JPanel {
 
         role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
+        LOGS.setBackground(new java.awt.Color(48, 173, 95));
+        LOGS.setForeground(new java.awt.Color(255, 255, 255));
+        LOGS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/15.png"))); // NOI18N
+        LOGS.setText("User Logs");
+        LOGS.setContentAreaFilled(false);
+        LOGS.setOpaque(true);
+        LOGS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LOGSActionPerformed(evt);
+            }
+        });
+
+        updateuser.setText("Updated a User");
+
+        deleteuser.setText("Deleted a User");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,7 +221,13 @@ public class ADD_USER extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ADDUSER, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LOGS, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(218, 218, 218)
+                                .addComponent(deleteuser)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(updateuser)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,10 +276,20 @@ public class ADD_USER extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DELETE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DELETE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(LOGS, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(updateuser)
+                                    .addComponent(deleteuser)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -263,7 +311,7 @@ public class ADD_USER extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(role, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,6 +335,10 @@ public class ADD_USER extends javax.swing.JPanel {
             id.getText()  
             );
              Table_View();
+             
+            DataBaseLogs dbl = DataBaseLogs.getInstance();
+            dbl.updateUserlog();
+             
 
     }//GEN-LAST:event_UPDATEActionPerformed
 
@@ -310,8 +362,10 @@ public class ADD_USER extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Deleted");
                 pst.close();
                 rs.close();
-                clear();
+//                clear();
                 Table_View();
+                DataBaseLogs dbl = DataBaseLogs.getInstance();
+                dbl.deleteUserlog();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -346,13 +400,22 @@ public class ADD_USER extends javax.swing.JPanel {
            }
     }//GEN-LAST:event_UPDATEKeyReleased
 
+    private void LOGSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGSActionPerformed
+        userLogs ul = userLogs.getInstance();
+        ul.setVisible(true);
+        
+        
+    }//GEN-LAST:event_LOGSActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDUSER;
     private javax.swing.JButton DELETE;
+    private javax.swing.JButton LOGS;
     private javax.swing.JButton UPDATE;
     private javax.swing.JTable USERS;
     private javax.swing.JLabel asdsad;
+    public javax.swing.JLabel deleteuser;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
@@ -365,6 +428,7 @@ public class ADD_USER extends javax.swing.JPanel {
     private javax.swing.JTextField lname;
     private javax.swing.JComboBox<String> role;
     private javax.swing.JTextField uname;
+    public javax.swing.JLabel updateuser;
     // End of variables declaration//GEN-END:variables
 
 }

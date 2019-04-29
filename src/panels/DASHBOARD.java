@@ -1,6 +1,8 @@
 package panels;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
+import fitnesscampsystem.Main_Frame_Admin;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,6 +23,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
 
@@ -30,17 +34,26 @@ public class DASHBOARD extends javax.swing.JPanel {
     PreparedStatement pst = null;
     DefaultTableModel MODEL;
 
+    private static DASHBOARD instance = null;
+
+    public static DASHBOARD getInstance() {
+        if (instance == null) {
+            instance = new DASHBOARD();
+        }
+        return instance;
+    }
+
     public DASHBOARD() {
         initComponents();
         con = Database.ConnectDB();
 
         all_expired();
-//
-        END.setVisible(false);
-        START.setVisible(false);
-        ID.setVisible(false);
-//        
 
+//
+//        END.setVisible(false);
+//        START.setVisible(false);
+//        ID.setVisible(false);
+//        
         allexpired_tbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         allexpired_tbl.getTableHeader().setOpaque(false);
         allexpired_tbl.getTableHeader().setBackground(new Color(48, 173, 95));
@@ -49,53 +62,90 @@ public class DASHBOARD extends javax.swing.JPanel {
         allexpired_tbl.getTableHeader().setReorderingAllowed(false);
     }
 
-    public void renewal() {
-        DefaultTableModel model = (DefaultTableModel) allexpired_tbl.getModel();
-        int row = allexpired_tbl.getSelectedRow();
-        String tc = allexpired_tbl.getModel().getValueAt(row, 0).toString();
+    public void populate() {
+        int index = allexpired_tbl.getSelectedRow();
+        TableModel model = allexpired_tbl.getModel();
+
+        String id = model.getValueAt(index, 0).toString();
+        String firstname = model.getValueAt(index, 1).toString();
+        String lastname = model.getValueAt(index, 2).toString();
+        String gen = model.getValueAt(index, 3).toString();
+        String number = model.getValueAt(index, 4).toString();
+        String start = model.getValueAt(index, 5).toString();
+        String end = model.getValueAt(index, 6).toString();
+
+        ID.setText(id);
+        fname.setText(firstname);
+        lname.setText(lastname);
+        gender.setText(gen);
+        contactno.setText(number);
+
+        Date d = new Date();
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        START.setText(s.format(d));
+//        START.setText(start);
+
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Calendar xdate = Calendar.getInstance();
         xdate.add(Calendar.MONTH, 1);
-
-        try {
-            String sql = "SELECT * FROM Members_Tbl WHERE mfirstName = '" + tc + "'";
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                String id = rs.getString("members_id");
-                ID.setText(id);
-                String Start = rs.getString("Start");
-                START.setText(Start);
-                String End = rs.getString("End");
-                END.setText("" + df.format(xdate.getTime()));
-            }
-            pst.close();
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null, e);
-        }
-        all_expired();
+        END.setText("" + df.format(xdate.getTime()));
     }
 
+//    public void renewal() {
+//        DefaultTableModel model = (DefaultTableModel) allexpired_tbl.getModel();
+//        int row = allexpired_tbl.getSelectedRow();
+//        String tc = allexpired_tbl.getModel().getValueAt(row, 0).toString();
+//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//        Calendar xdate = Calendar.getInstance();
+//        xdate.add(Calendar.MONTH, 1);
+//
+//        try {
+//            String sql = "SELECT * FROM Members_Tbl WHERE mfirstName = '" + tc + "'";
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                String id = rs.getString("members_id");
+//                ID.setText(id);
+//                String Start = rs.getString("Start");
+//                START.setText(Start);
+//                String End = rs.getString("End");
+//                END.setText("" + df.format(xdate.getTime()));
+//            }
+//            pst.close();
+//            rs.close();
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//        all_expired();
+//    }
     public void renewClicked(String Start, String End, String members_id) {
+        int opt = JOptionPane.showConfirmDialog(null, "Renew this member?", "Delete", JOptionPane.YES_NO_OPTION);
+        if (opt == 0) {
+            String sql = "UPDATE Members_Tbl SET Start = ?, End = ? WHERE members_id = ?";
 
-        String sql = "UPDATE Members_Tbl SET Start = ?, End = ? WHERE members_id = ?";
+            try {
+                PreparedStatement pstmt = con.prepareStatement(sql);
+                con = Database.ConnectDB();
+                // set the corresponding param
+                pstmt.setString(1, Start);
+                pstmt.setString(2, End);
+                pstmt.setString(3, members_id);
+                // update
+                pstmt.executeUpdate();
 
-        try {
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            con = Database.ConnectDB();
-            // set the corresponding param
-            pstmt.setString(1, Start);
-            pstmt.setString(2, End);
-            pstmt.setString(3, members_id);
-            // update
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null,"Success");
+
+            DataBaseLogs dbl = DataBaseLogs.getInstance();
+            dbl.renewLog();
             all_expired();
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+           
         }
+      }
     }
 
     private void all_expired() {
@@ -122,7 +172,7 @@ public class DASHBOARD extends javax.swing.JPanel {
             c.set(Calendar.DAY_OF_MONTH, 1);
             c = Calendar.getInstance(); // reset
             String today = dateFormat.format(c.getTime());
-            String sql = "SELECT members_id, mfirstName, mlastName,  gender, ContactNumber, Membership, Start, End FROM Members_Tbl WHERE End <=  '" + today + "'";
+            String sql = "SELECT members_id, mfirstName, mlastName,  gender, ContactNumber, Start, End FROM Members_Tbl WHERE End <=  '" + today + "'";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             allexpired_tbl.setModel(DbUtils.resultSetToTableModel(rs));
@@ -149,6 +199,12 @@ public class DASHBOARD extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         search = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        fname = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
+        gender = new javax.swing.JTextField();
+        contactno = new javax.swing.JTextField();
+        deletedmem = new javax.swing.JLabel();
+        renewmember = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -212,6 +268,12 @@ public class DASHBOARD extends javax.swing.JPanel {
             }
         });
 
+        ID.setText("id");
+
+        START.setText("start");
+
+        END.setText("end");
+
         search.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -223,6 +285,18 @@ public class DASHBOARD extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (1).png"))); // NOI18N
         jLabel1.setOpaque(true);
 
+        fname.setText("firstname");
+
+        lname.setText("lname");
+
+        gender.setText("gender");
+
+        contactno.setText("contactno");
+
+        deletedmem.setText("Deleted a Member");
+
+        renewmember.setText("Renew a Member");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,29 +305,42 @@ public class DASHBOARD extends javax.swing.JPanel {
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(START, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(END, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RENEW)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(DELETEBTN))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(PANE, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(136, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(START, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(END, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RENEW)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DELETEBTN))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(PANE, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(136, Short.MAX_VALUE))))
+                                .addComponent(contactno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(323, 323, 323)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(renewmember)
+                                    .addComponent(deletedmem))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +364,18 @@ public class DASHBOARD extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(DELETEBTN)
                         .addComponent(RENEW)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contactno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deletedmem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(renewmember)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,7 +385,8 @@ public class DASHBOARD extends javax.swing.JPanel {
     }//GEN-LAST:event_RENEWActionPerformed
 
     private void allexpired_tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allexpired_tblMouseClicked
-        renewal();
+//        renewal();
+        populate();
     }//GEN-LAST:event_allexpired_tblMouseClicked
 
     private void DELETEBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELETEBTNActionPerformed
@@ -342,9 +441,15 @@ public class DASHBOARD extends javax.swing.JPanel {
     private javax.swing.JButton RENEW;
     private javax.swing.JTextField START;
     private javax.swing.JTable allexpired_tbl;
+    private javax.swing.JTextField contactno;
+    public javax.swing.JLabel deletedmem;
+    private javax.swing.JTextField fname;
+    private javax.swing.JTextField gender;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField lname;
+    public javax.swing.JLabel renewmember;
     private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }

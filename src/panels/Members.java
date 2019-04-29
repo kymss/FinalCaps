@@ -1,5 +1,6 @@
 package panels;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import fitnesscampsystem.Add_a_Member;
 import fitnesscampsystem.Main_Frame_Admin;
@@ -206,6 +207,7 @@ public class Members extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         MID = new javax.swing.JLabel();
+        deleteMem = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -309,6 +311,8 @@ public class Members extends javax.swing.JPanel {
 
         MID.setText("jLabel2");
 
+        deleteMem.setText("Deleted a Member");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -342,7 +346,10 @@ public class Members extends javax.swing.JPanel {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ADDMEMBERS, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(418, 418, 418)
+                        .addComponent(deleteMem)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -368,7 +375,9 @@ public class Members extends javax.swing.JPanel {
                     .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DELETE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(deleteMem)
+                .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -411,6 +420,9 @@ public class Members extends javax.swing.JPanel {
             Database db = Database.getInstance();
             db.deleteMember(id);
             Table_view();
+            
+            DataBaseLogs dbl = DataBaseLogs.getInstance();
+            dbl.deleteMember();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Select a Member first!");
@@ -494,6 +506,7 @@ public class Members extends javax.swing.JPanel {
     public javax.swing.JTable MEMBERSTABLE;
     private javax.swing.JLabel MID;
     private javax.swing.JButton UPDATE;
+    public javax.swing.JLabel deleteMem;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;

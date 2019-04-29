@@ -103,7 +103,11 @@
                           <Component id="rl" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="confirmpw" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="lsname" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                          <Component id="pw" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="pw" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                              <Component id="pwdescription" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="fsname" alignment="0" max="32767" attributes="0"/>
                               <Component id="usname" alignment="0" pref="92" max="32767" attributes="0"/>
@@ -155,7 +159,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lsname" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="pw" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="pw" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pwdescription" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="confirmpw" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -338,6 +345,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="orayt"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="pwdescription">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Change Password"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

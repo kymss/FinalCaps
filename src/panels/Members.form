@@ -58,6 +58,10 @@
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="1045" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
+                      <Component id="deleteMem" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="65" max="32767" attributes="0"/>
           </Group>
@@ -89,7 +93,9 @@
                   <Component id="UPDATE" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="DELETE" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="78" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Component id="deleteMem" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -248,6 +254,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="deleteMem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Deleted a Member"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

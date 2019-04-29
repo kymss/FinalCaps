@@ -1,6 +1,7 @@
 
 package fitnesscampsystem;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -148,6 +149,7 @@ public class Update_Member extends javax.swing.JFrame {
         lastnameField = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         aydi = new javax.swing.JLabel();
+        updateDescription = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -432,6 +434,10 @@ public class Update_Member extends javax.swing.JFrame {
         jPanel1.add(aydi);
         aydi.setBounds(40, 40, 34, 14);
 
+        updateDescription.setText("Updated a Member's Information");
+        jPanel1.add(updateDescription);
+        updateDescription.setBounds(290, 630, 170, 14);
+
         jPanel2.setBackground(new java.awt.Color(48, 173, 95));
         jPanel2.setLayout(null);
 
@@ -509,6 +515,8 @@ public class Update_Member extends javax.swing.JFrame {
         month.getSelectedItem().toString(),
         aydi.getText()
         );
+        DataBaseLogs dbl = DataBaseLogs.getInstance();
+        dbl.updateMember();
     }//GEN-LAST:event_UPDATEActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
@@ -599,5 +607,6 @@ public class Update_Member extends javax.swing.JFrame {
     public javax.swing.JTextField relationshipField;
     public javax.swing.JComboBox<String> sexComboBox;
     public javax.swing.JTextField targetweightField;
+    public javax.swing.JLabel updateDescription;
     // End of variables declaration//GEN-END:variables
 }

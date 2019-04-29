@@ -1,5 +1,6 @@
 package fitnesscampsystem;
 
+import DataBase.DataBaseLogs;
 import DataBase.Database;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -30,11 +31,18 @@ public class changepass extends javax.swing.JFrame {
         disp();
         check.setVisible(false);
         confirm.setVisible(false);
+        id.setVisible(false);
+        usname.setVisible(false);
+        fsname.setVisible(false);
+        lsname.setVisible(false);
+        pw.setVisible(false);
+        confirmpw.setVisible(false);
+        rl.setVisible(false);
     }
 
     public void disp() {
         Main_Frame_Admin mfa = Main_Frame_Admin.getInstance();
-        String userid = mfa.display_id.getText();
+        String userid = mfa.USER_ID.getText();
 //        String userid = cp_id.getText();
 
         String sql = "SELECT * FROM Login_Tbl WHERE user_id = " + userid;
@@ -100,6 +108,7 @@ public class changepass extends javax.swing.JFrame {
         id = new javax.swing.JLabel();
         check = new javax.swing.JLabel();
         confirm = new javax.swing.JLabel();
+        pwdescription = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -184,6 +193,8 @@ public class changepass extends javax.swing.JFrame {
 
         confirm.setText("orayt");
 
+        pwdescription.setText("Change Password");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -219,7 +230,10 @@ public class changepass extends javax.swing.JFrame {
                     .addComponent(rl, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmpw, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lsname, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pw, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(pw, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153)
+                        .addComponent(pwdescription))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(fsname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(usname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
@@ -262,7 +276,9 @@ public class changepass extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lsname)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pw)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pw)
+                            .addComponent(pwdescription))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(confirmpw)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -316,6 +332,8 @@ public class changepass extends javax.swing.JFrame {
                         rl.getText(),
                         id.getText()
                 );
+                DataBaseLogs dbl = DataBaseLogs.getInstance();
+                dbl.changePassLog();
             }
         }
     }//GEN-LAST:event_CONFIRMActionPerformed
@@ -385,6 +403,7 @@ public class changepass extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     public javax.swing.JLabel lsname;
     public javax.swing.JLabel pw;
+    public javax.swing.JLabel pwdescription;
     public javax.swing.JLabel rl;
     public javax.swing.JLabel usname;
     // End of variables declaration//GEN-END:variables
