@@ -34,7 +34,7 @@ public class Add_a_Member extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    DefaultTableModel dm;
+    
 
     public Add_a_Member() {
         initComponents();
@@ -144,6 +144,9 @@ public class Add_a_Member extends javax.swing.JFrame {
             clear_ops();
             DataBaseLogs dbl = DataBaseLogs.getInstance();
             dbl.addMemberLog();
+            
+//            Members m = Members.getInstance();
+//            m.refreshTable();
         }
     }
 
@@ -259,6 +262,7 @@ public class Add_a_Member extends javax.swing.JFrame {
         comn = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         description = new javax.swing.JLabel();
+        Clear = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -577,7 +581,7 @@ public class Add_a_Member extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CANCEL);
-        CANCEL.setBounds(110, 590, 170, 30);
+        CANCEL.setBounds(50, 590, 150, 30);
 
         SAVEmem.setBackground(new java.awt.Color(48, 173, 95));
         SAVEmem.setForeground(new java.awt.Color(255, 255, 255));
@@ -590,7 +594,7 @@ public class Add_a_Member extends javax.swing.JFrame {
             }
         });
         jPanel1.add(SAVEmem);
-        SAVEmem.setBounds(320, 590, 170, 30);
+        SAVEmem.setBounds(370, 590, 170, 30);
 
         month.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "1 year" }));
         month.setToolTipText("");
@@ -682,6 +686,17 @@ public class Add_a_Member extends javax.swing.JFrame {
         jPanel1.add(description);
         description.setBounds(300, 640, 130, 14);
 
+        Clear.setText("Cancel");
+        Clear.setContentAreaFilled(false);
+        Clear.setOpaque(true);
+        Clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Clear);
+        Clear.setBounds(210, 590, 150, 30);
+
         jPanel2.setBackground(new java.awt.Color(48, 173, 95));
         jPanel2.setLayout(null);
 
@@ -762,14 +777,20 @@ public class Add_a_Member extends javax.swing.JFrame {
     }//GEN-LAST:event_monthActionPerformed
 
     private void CANCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CANCELActionPerformed
+        
+        
         this.setDefaultCloseOperation(Main_Frame_Admin.DISPOSE_ON_CLOSE);
         close();
 
         Main_Frame_Admin mf = Main_Frame_Admin.getInstance();
         mf.setEnabled(true);
+        
+           Members m = Members.getInstance();
+           m.Table_view();
+        
 
-        Members m = Members.getInstance();
-        m.Table_view();
+//        Members m = Members.getInstance();
+//        m.Table_view();
 
 //            Members o = Members.getInstance();              
 //                o.Table_view();
@@ -779,6 +800,7 @@ public class Add_a_Member extends javax.swing.JFrame {
 //        payment i = new payment();
 //        i.setVisible(true);  
         Save();
+        
         
 
 
@@ -843,6 +865,10 @@ public class Add_a_Member extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sexComboBoxActionPerformed
 
+    private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -880,6 +906,7 @@ public class Add_a_Member extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CANCEL;
+    private javax.swing.JButton Clear;
     private javax.swing.JRadioButton ExMember;
     private javax.swing.JRadioButton Internet;
     private javax.swing.JRadioButton JustWalkIn;

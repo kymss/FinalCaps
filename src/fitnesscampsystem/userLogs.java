@@ -75,7 +75,6 @@ public class userLogs extends javax.swing.JFrame {
         generate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 500));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,7 +100,7 @@ public class userLogs extends javax.swing.JFrame {
             }
         });
         jPanel1.add(generate);
-        generate.setBounds(650, 430, 210, 23);
+        generate.setBounds(650, 440, 210, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 990, 550);
@@ -125,7 +124,7 @@ public class userLogs extends javax.swing.JFrame {
         Document doc = new Document();
         
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream(path+"abc123.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream(path+"UserLogs.pdf"));
             
             doc.open();
             PdfPTable tbl = new PdfPTable(5);

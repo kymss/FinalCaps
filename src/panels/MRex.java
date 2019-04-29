@@ -2,11 +2,21 @@
 package panels;
 
 import DataBase.Database;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import fitnesscampsystem.userLogs;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import net.proteanit.sql.DbUtils;
 
 
@@ -58,6 +68,7 @@ public class MRex extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         ExpiredSubs = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         ExpiredSubs = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -75,21 +86,94 @@ public class MRex extends javax.swing.JPanel {
         ExpiredSubs.setSelectionBackground(new java.awt.Color(51, 210, 102));
         jScrollPane1.setViewportView(ExpiredSubs);
 
+        jButton1.setText("Generate Report");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       String path = "";
+        
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x= j.showSaveDialog(this);
+        
+        
+        if (x== JFileChooser.APPROVE_OPTION){
+            path = j.getSelectedFile().getPath();
+        }
+        Document doc = new Document();
+        
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream(path+"MonthIncome.pdf"));
+            
+            doc.open();
+            PdfPTable tbl = new PdfPTable(5);
+            
+            
+            tbl.addCell("FIRSTNAME");
+            tbl.addCell("LASTNAME");
+            tbl.addCell("GENDER");
+            tbl.addCell("START");
+            tbl.addCell("END");
+            
+            
+            
+            for (int i = 0; i < ExpiredSubs.getRowCount(); i++) {
+                String fname = ExpiredSubs.getValueAt(i, 0).toString();
+                String lname = ExpiredSubs.getValueAt(i, 1).toString();
+                String gender = ExpiredSubs.getValueAt(i, 2).toString();
+                String start = ExpiredSubs.getValueAt(i, 3).toString();
+                String end = ExpiredSubs.getValueAt(i, 4).toString();
+                
+                
+                tbl.addCell(fname);
+                tbl.addCell(lname);
+                tbl.addCell(gender);
+                tbl.addCell(start);
+                tbl.addCell(end);
+                
+            }
+            
+            doc.add(tbl);
+           
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(userLogs.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(userLogs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        doc.close();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ExpiredSubs;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,11 +2,21 @@
 package panels;
 
 import DataBase.Database;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import fitnesscampsystem.userLogs;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import net.proteanit.sql.DbUtils;
 
 
@@ -32,7 +42,7 @@ public final class MRsubscriptions extends javax.swing.JPanel {
     public void Table_view() {
         try {
 //             select * from table where strftime('%m', created_date) == strftime('%m','now')
-            String sql = "SELECT members_id, mfirstName, mlastName from Members_Tbl WHERE strftime('%m', Start) == strftime('%m', 'now')";
+            String sql = "SELECT mfirstName, mlastName,gender, Start, End from Members_Tbl WHERE strftime('%m', Start) == strftime('%m', 'now')";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -57,6 +67,7 @@ public final class MRsubscriptions extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         monthlyreports = new javax.swing.JTable();
+        REPORT = new javax.swing.JButton();
 
         monthlyreports = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -74,20 +85,93 @@ public final class MRsubscriptions extends javax.swing.JPanel {
         monthlyreports.setSelectionBackground(new java.awt.Color(51, 210, 102));
         jScrollPane1.setViewportView(monthlyreports);
 
+        REPORT.setText("Generate Report");
+        REPORT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                REPORTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(REPORT, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(REPORT)
+                .addGap(0, 17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void REPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REPORTActionPerformed
+                 
+        String path = "";
+        
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x= j.showSaveDialog(this);
+        
+        
+        if (x== JFileChooser.APPROVE_OPTION){
+            path = j.getSelectedFile().getPath();
+        }
+        Document doc = new Document();
+        
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream(path+"MonthSubscriptions.pdf"));
+            
+            doc.open();
+            PdfPTable tbl = new PdfPTable(5);
+            
+            
+            tbl.addCell("FIRSTNAME");
+            tbl.addCell("LASTNAME");
+            tbl.addCell("GENDER");
+            tbl.addCell("START");
+            tbl.addCell("END");
+            
+            
+            for (int i = 0; i < monthlyreports.getRowCount(); i++) {
+                String fname = monthlyreports.getValueAt(i, 0).toString();
+                String lname = monthlyreports.getValueAt(i, 1).toString();
+                String gender = monthlyreports.getValueAt(i, 2).toString();
+                String start = monthlyreports.getValueAt(i, 3).toString();
+                String end = monthlyreports.getValueAt(i, 4).toString();
+                
+                tbl.addCell(fname);
+                tbl.addCell(lname);
+                tbl.addCell(gender);
+                tbl.addCell(start);
+                tbl.addCell(end);
+                
+            }
+            
+            doc.add(tbl);
+           
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(userLogs.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(userLogs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        doc.close();
+        
+        
+    }//GEN-LAST:event_REPORTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton REPORT;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable monthlyreports;
     // End of variables declaration//GEN-END:variables

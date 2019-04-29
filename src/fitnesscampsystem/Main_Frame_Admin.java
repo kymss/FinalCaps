@@ -706,7 +706,7 @@ public class Main_Frame_Admin extends javax.swing.JFrame {
 
         DynamicPanel.setBackground(new java.awt.Color(255, 255, 255));
         DynamicPanel.setLayout(new java.awt.CardLayout());
-        getContentPane().add(DynamicPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 1110, 660));
+        getContentPane().add(DynamicPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 1120, 660));
 
         getAccessibleContext().setAccessibleName("Main menu");
 
