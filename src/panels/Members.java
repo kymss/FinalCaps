@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -28,7 +27,7 @@ public class Members extends javax.swing.JPanel {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    DefaultTableModel MODEL; 
+    DefaultTableModel setTABLE_MODEL = new DefaultTableModel();
 //    static String setFirstname = "";
     private static Members instance = null;
 
@@ -43,19 +42,16 @@ public class Members extends javax.swing.JPanel {
         initComponents();
         MID.setVisible(false);
         con = Database.ConnectDB();
-        
+        Table_view();
         ID.setVisible(false);
-        MODEL = new DefaultTableModel();
-        MEMBERSTABLE.setModel(MODEL);
+
         MEMBERSTABLE.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         MEMBERSTABLE.getTableHeader().setOpaque(false);
         MEMBERSTABLE.getTableHeader().setBackground(new Color(48, 173, 95));
         MEMBERSTABLE.getTableHeader().setForeground(new Color(255, 250, 250));
         MEMBERSTABLE.setRowHeight(25);
         MEMBERSTABLE.getTableHeader().setReorderingAllowed(false);
-//        displayEmployeeList(MODEL);
-        
-        Table_view();
+
 //        MID = new JLabel();
 //        MID.setBounds(0,0,0,0);
         FNAME = new JLabel();
@@ -118,15 +114,14 @@ public class Members extends javax.swing.JPanel {
 
     Update_Member jtRowData = new Update_Member();
 
-    
     public void Table_view() {
         try {
-            String sql = "SELECT mfirstName, mmiddleName, mlastName, gender, ContactNumber, Occupation  from Members_Tbl";
+            String sql = "SELECT members_id, mfirstName, mlastName, gender, ContactNumber, Start, End from Members_Tbl";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
-//         
-            MEMBERSTABLE.setModel(DbUtils.resultSetToTableModel(rs));   
-            
+
+            MEMBERSTABLE.setModel(DbUtils.resultSetToTableModel(rs));
+
             pst.close();
             rs.close();
         } catch (Exception e) {
@@ -284,16 +279,14 @@ public class Members extends javax.swing.JPanel {
                 return false;
             }
         };
-        MEMBERSTABLE.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         MEMBERSTABLE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "ID", "FirstName", "LastName"
             }
         ));
-        MEMBERSTABLE.setGridColor(new java.awt.Color(255, 255, 255));
         MEMBERSTABLE.setSelectionBackground(new java.awt.Color(51, 210, 102));
         MEMBERSTABLE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -418,23 +411,23 @@ public class Members extends javax.swing.JPanel {
     }//GEN-LAST:event_searchKeyPressed
 
     private void DELETEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELETEActionPerformed
-
+        
         int row = MEMBERSTABLE.getSelectedRow();
         if (row >= 0) {
             int opt = JOptionPane.showConfirmDialog(null, "Are you sure to Delete this information?", "Delete", JOptionPane.YES_NO_OPTION);
             if (opt == 0) {
-                String id = MEMBERSTABLE.getModel().getValueAt(row, 0).toString();
-                Database db = Database.getInstance();
-                db.deleteMember(id);
-//                Table_view();
-
-                DataBaseLogs dbl = DataBaseLogs.getInstance();
-                dbl.deleteMember();
+            String id = MEMBERSTABLE.getModel().getValueAt(row, 0).toString();
+            Database db = Database.getInstance();
+            db.deleteMember(id);
+            Table_view();
+            
+            DataBaseLogs dbl = DataBaseLogs.getInstance();
+            dbl.deleteMember();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Select a Member first!");
         }
-
+        
     }//GEN-LAST:event_DELETEActionPerformed
 
 
@@ -490,7 +483,7 @@ public class Members extends javax.swing.JPanel {
 //        this.setEnabled(false);
 //        add.show();
         add.setVisible(true);
-//        Table_view();
+        Table_view();
 
 
     }//GEN-LAST:event_ADDMEMBERSActionPerformed
@@ -502,7 +495,7 @@ public class Members extends javax.swing.JPanel {
     }//GEN-LAST:event_MEMBERSTABLEMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        Table_view();
+        Table_view();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

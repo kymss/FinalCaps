@@ -103,7 +103,7 @@ public class userLogs extends javax.swing.JFrame {
         generate.setBounds(650, 440, 210, 23);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 990, 550);
+        jPanel1.setBounds(0, 0, 910, 510);
 
         pack();
         setLocationRelativeTo(null);
